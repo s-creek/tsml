@@ -1,0 +1,9 @@
+tasks:
+  - name: O2
+    events:
+      - type: gate
+        label: Gate-1
+        location: [ [ 3.83, 3.183, 3.565 ], [ 2.24, 3.183, 3.565 ] ]
+      - type: gate
+        label: Gate-2
+        location: [ [ 3.83, 12.04, 3.565 ], [ 2.24, 12.04, 3.565 ] ]

@@ -1,0 +1,934 @@
+#VRML V2.0 utf8
+
+PROTO Joint [
+  exposedField     SFVec3f      center              0 0 0
+  exposedField     MFNode       children            []
+  exposedField     MFFloat      llimit              []
+  exposedField     MFFloat      lvlimit             []
+  exposedField     SFRotation   limitOrientation    0 0 1 0
+  exposedField     SFString     name                ""
+  exposedField     SFRotation   rotation            0 0 1 0
+  exposedField     SFVec3f      scale               1 1 1
+  exposedField     SFRotation   scaleOrientation    0 0 1 0
+  exposedField     MFFloat      stiffness           [ 0 0 0 ]
+  exposedField     SFVec3f      translation         0 0 0
+  exposedField     MFFloat      ulimit              []
+  exposedField     MFFloat      uvlimit             []
+  exposedField     SFString     jointType           ""
+  exposedField     SFInt32      jointId             -1
+  exposedField     SFVec3f      jointAxis           0 0 1
+
+  exposedField     SFFloat      gearRatio           1
+  exposedField     SFFloat      rotorInertia        0
+  exposedField     SFFloat      rotorResistor       0
+  exposedField     SFFloat      torqueConst         1
+  exposedField     SFFloat      encoderPulse        1
+]
+{
+  Transform {
+    center           IS center
+    children         IS children
+    rotation         IS rotation
+    scale            IS scale
+    scaleOrientation IS scaleOrientation
+    translation      IS translation
+  }
+}
+
+PROTO Segment [
+  field           SFVec3f     bboxCenter        0 0 0
+  field           SFVec3f     bboxSize          -1 -1 -1
+  exposedField    SFVec3f     centerOfMass      0 0 0
+  exposedField    MFNode      children          [ ]
+  exposedField    SFNode      coord             NULL
+  exposedField    MFNode      displacers        [ ]
+  exposedField    SFFloat     mass              0
+  exposedField    MFFloat     momentsOfInertia  [ 0 0 0 0 0 0 0 0 0 ]
+  exposedField    SFString    name              ""
+  eventIn         MFNode      addChildren
+  eventIn         MFNode      removeChildren
+]
+{
+  Group {
+    addChildren    IS addChildren
+    bboxCenter     IS bboxCenter
+    bboxSize       IS bboxSize
+    children       IS children
+    removeChildren IS removeChildren
+  }
+}
+
+PROTO Surface [
+ field   SFVec3f bboxCenter 0 0 0
+ field   SFVec3f bboxSize   -1 -1 -1
+ field   MFNode  visual     [ ]
+ field   MFNode  collision  [ ]
+ eventIn MFNode  addChildren
+ eventIn MFNode  removeChildren
+]
+{
+  Group {
+    addChildren    IS addChildren
+    bboxCenter     IS bboxCenter
+    bboxSize       IS bboxSize
+    children       IS visual
+    removeChildren IS removeChildren
+  }
+}
+
+PROTO Humanoid [
+  field           SFVec3f    bboxCenter            0 0 0
+  field           SFVec3f    bboxSize              -1 -1 -1
+  exposedField    SFVec3f    center                0 0 0
+  exposedField    MFNode     humanoidBody          [ ]
+  exposedField    MFString   info                  [ ]
+  exposedField    MFNode     joints                [ ]
+  exposedField    SFString   name                  ""
+  exposedField    SFRotation rotation              0 0 1 0
+  exposedField    SFVec3f    scale                 1 1 1
+  exposedField    SFRotation scaleOrientation      0 0 1 0
+  exposedField    MFNode     segments              [ ]
+  exposedField    MFNode     sites                 [ ]
+  exposedField    SFVec3f    translation           0 0 0
+  exposedField    SFString   version               "1.1"
+  exposedField    MFNode     viewpoints            [ ]
+]
+{
+  Transform {
+    bboxCenter       IS bboxCenter
+    bboxSize         IS bboxSize
+    center           IS center
+    rotation         IS rotation
+    scale            IS scale
+    scaleOrientation IS scaleOrientation
+    translation      IS translation
+    children [
+      Group {
+        children IS viewpoints
+      }
+    ]
+  }
+}
+
+PROTO ExtraJoint [
+  exposedField SFString link1Name ""
+  exposedField SFString link2Name ""
+  exposedField SFVec3f  link1LocalPos 0 0 0
+  exposedField SFVec3f  link2LocalPos 0 0 0
+  exposedField SFString jointType "xyz"
+  exposedField SFVec3f  jointAxis 1 0 0
+]
+{
+}
+
+
+
+DEF hose Humanoid {
+  humanoidBody [
+    DEF box Joint {
+      jointType "fixed"
+      translation 0.0 0.0 0.0
+      rotation 0 1 0 0
+      children [
+        DEF box Segment {
+        }
+            
+        DEF hinge_hose0 Joint {
+          jointType "rotate"
+          jointAxis 0.0 0.0 1.0
+          jointId 0
+          translation 0.577646 7.6434 1.4206
+          rotation 0 1 0 0
+          ulimit 1e+16
+          llimit -1e+16
+          children [
+            DEF YawPart Segment {
+              mass 0.01375
+              centerOfMass 0 0 -0.025
+              momentsOfInertia [5.013e-6 0.0 0.0 0.0 5.013e-6 0.0 0.0 0.0 4.297e-6]
+              children [
+                Transform {
+                  scale 1.0 1.0 1.0
+                  translation 0.0 0.0 0.0
+                  rotation 0 1 0 0
+                  children [
+                    Inline {
+                      url "shape/L11ND-visual.wrl"
+                    }
+                  ]
+                }
+              ]
+            }
+                
+            DEF hinge_1st2L11WD Joint {
+              jointType "rotate"
+              jointAxis 1.0 0.0 0.0
+              jointId 1
+              translation 0.0 8.881784197e-16 -0.05
+              rotation 0 1 0 0
+              ulimit 2.1
+              llimit -2.1
+              children [
+                DEF RollPart Segment {
+                  mass 0.01375
+                  centerOfMass 0 0 -0.025
+                  momentsOfInertia [5.013e-6 0.0 0.0 0.0 5.013e-6 0.0 0.0 0.0 4.297e-6]
+                  children [
+                    Transform {
+                      scale 1.0 1.0 1.0
+                      translation 0 0 -0.05
+                      rotation 0 1 0 0
+                      children [
+                        Inline {
+                          url "shape/L11WD-visual.wrl"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                    
+                DEF hinge_L11WD2L11ND Joint {
+                  jointType "rotate"
+                  jointAxis 0.0 0.0 1.0
+                  jointId 2
+                  translation 0 0 -0.05
+                  rotation 0 1 0 0
+                  ulimit 1e+16
+                  llimit -1e+16
+                  children [
+                    USE YawPart
+                        
+                    DEF hinge_L11ND2L12WD Joint {
+                      jointType "rotate"
+                      jointAxis 1.0 0.0 0.0
+                      jointId 3
+                      translation 0 0 -0.05
+                      rotation 0 1 0 0
+                      ulimit 2.1
+                      llimit -2.1
+                      children [
+                        USE RollPart
+                            
+                        DEF hinge_L12WD2L12ND Joint {
+                          jointType "rotate"
+                          jointAxis 0.0 0.0 1.0
+                          jointId 4
+                          translation 0 0 -0.05
+                          rotation 0 1 0 0
+                          ulimit 1e+16
+                          llimit -1e+16
+                          children [
+                            USE YawPart
+                                
+                            DEF hinge_L12ND2L13WD Joint {
+                              jointType "rotate"
+                              jointAxis 1.0 0.0 0.0
+                              jointId 5
+                              translation 0 0 -0.05
+                              rotation 0 1 0 0
+                              ulimit 2.1
+                              llimit -2.1
+                              children [
+                                USE RollPart
+                                    
+                                DEF hinge_L13WD2L13ND Joint {
+                                  jointType "rotate"
+                                  jointAxis 0.0 0.0 1.0
+                                  jointId 6
+                                  translation 0 0 -0.05
+                                  rotation 0 1 0 0
+                                  ulimit 1e+16
+                                  llimit -1e+16
+                                  children [
+                                    USE YawPart
+                                        
+                                    DEF hinge_L13ND2S1WD Joint {
+                                      jointType "rotate"
+                                      jointAxis 1.0 0.0 0.0
+                                      jointId 7
+                                      translation 0 0 -0.05
+                                      rotation -1.0 0 0 1.5708
+                                      ulimit 3.67
+                                      llimit -0.53
+                                      children [
+                                        USE RollPart
+                                            
+                                        DEF hinge_S1WD2S1ND Joint {
+                                          jointType "rotate"
+                                          jointAxis 0.0 0.0 1.0
+                                          jointId 8
+                                          translation 0 0 -0.05
+                                          rotation 0 1 0 0
+                                          ulimit 1e+16
+                                          llimit -1e+16
+                                          children [
+                                            USE YawPart
+                                                
+                                            DEF hinge_S1ND2L21WD Joint {
+                                              jointType "rotate"
+                                              jointAxis 1.0 0.0 0.0
+                                              jointId 9
+                                              translation 0 0 -0.05
+                                              rotation -1.0 0 0 1.57079530718
+                                              ulimit 3.67
+                                              llimit -0.53
+                                              children [
+                                                USE RollPart
+                                                    
+                                                DEF hinge_L21WD2L21ND Joint {
+                                                  jointType "rotate"
+                                                  jointAxis 0 0 1.0
+                                                  jointId 10
+                                                  translation 0 0 -0.05
+                                                  rotation 0 1 0 0
+                                                  ulimit 1e+16
+                                                  llimit -1e+16
+                                                  children [
+                                                    USE YawPart
+                                                        
+                                                    DEF hinge_L21ND2L22WD Joint {
+                                                      jointType "rotate"
+                                                      jointAxis 1.0 0.0 0.0
+                                                      jointId 11
+                                                      translation 0 0  -0.05
+                                                      rotation 0 1 0 0
+                                                      ulimit 2.1
+                                                      llimit -2.1
+                                                      children [
+                                                        USE RollPart
+                                                            
+                                                        DEF hinge_L22WD2L22ND Joint {
+                                                          jointType "rotate"
+                                                          jointAxis 0.0 0 1.0
+                                                          jointId 12
+                                                          translation 0.0 0 -0.05
+                                                          rotation 0 1 0 0
+                                                          ulimit 1e+16
+                                                          llimit -1e+16
+                                                          children [
+                                                            USE YawPart
+                                                                
+                                                            DEF hinge_L22ND2L23WD Joint {
+                                                              jointType "rotate"
+                                                              jointAxis 1.0 0.0 0.0
+                                                              jointId 13
+                                                              translation 0 0 -0.05
+                                                              rotation 0 1 0 0
+                                                              ulimit 2.1
+                                                              llimit -2.1
+                                                              children [
+                                                                USE RollPart
+                                                                    
+                                                                DEF hinge_L23WD2L23ND Joint {
+                                                                  jointType "rotate"
+                                                                  jointAxis 0.0 0 1
+                                                                  jointId 14
+                                                                  translation 0 0 -0.05
+                                                                  rotation 0 1 0 0
+                                                                  ulimit 1e+16
+                                                                  llimit -1e+16
+                                                                  children [
+                                                                    USE YawPart
+                                                                        
+                                                                    DEF hinge_L23ND2S2WD Joint {
+                                                                      jointType "rotate"
+                                                                      jointAxis 1.0 0.0 0.0
+                                                                      jointId 15
+                                                                      translation 0 0 -0.05
+                                                                      rotation 1.0 0 0 1.57079530718
+                                                                      ulimit 0.53
+                                                                      llimit -3.67
+                                                                      children [
+                                                                        USE RollPart
+                                                                            
+                                                                        DEF hinge_S2WD2S2ND Joint {
+                                                                          jointType "rotate"
+                                                                          jointAxis 0.0 0.0 1.0
+                                                                          jointId 16
+                                                                          translation 0 0.0 -0.05
+                                                                          rotation 0 1 0 0
+                                                                          ulimit 1e+16
+                                                                          llimit -1e+16
+                                                                          children [
+                                                                            USE YawPart
+                                                                                
+                                                                            DEF hinge_S2ND2L31WD Joint {
+                                                                              jointType "rotate"
+                                                                              jointAxis 1.0 0.0 0.0
+                                                                              jointId 17
+                                                                              translation 0 0 -0.05
+                                                                              rotation 1.0 0 0 1.5708
+                                                                              ulimit 2.1
+                                                                              llimit -2.1
+                                                                              children [
+                                                                                USE RollPart
+                                                                                    
+                                                                                DEF hinge_L31WD2L31ND Joint {
+                                                                                  jointType "rotate"
+                                                                                  jointAxis 0.0 0.0 1.0
+                                                                                  jointId 18
+                                                                                  translation 0 0 -0.05
+                                                                                  rotation 0 1 0 0
+                                                                                  ulimit 1e+16
+                                                                                  llimit -1e+16
+                                                                                  children [
+                                                                                    USE YawPart
+                                                                                        
+                                                                                    DEF hinge_L31ND2L32WD Joint {
+                                                                                      jointType "rotate"
+                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                      jointId 19
+                                                                                      translation 0 0 -0.05
+                                                                                      rotation 0 1 0 0
+                                                                                      ulimit 2.1
+                                                                                      llimit -2.1
+                                                                                      children [
+                                                                                        USE RollPart
+                                                                                            
+                                                                                        DEF hinge_L32WD2L32ND Joint {
+                                                                                          jointType "rotate"
+                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                          jointId 20
+                                                                                          translation 0 0.0 -0.05
+                                                                                          rotation 0 1 0 0
+                                                                                          ulimit 1e+16
+                                                                                          llimit -1e+16
+                                                                                          children [
+                                                                                            USE YawPart
+                                                                                                
+                                                                                            DEF hinge_L32ND2L33WD Joint {
+                                                                                              jointType "rotate"
+                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                              jointId 21
+                                                                                              translation 0 0 -0.05
+                                                                                              rotation 0 1 0 0
+                                                                                              ulimit 2.1
+                                                                                              llimit -2.1
+                                                                                              children [
+                                                                                                USE RollPart
+                                                                                                    
+                                                                                                DEF hinge_L33WD2L33ND Joint {
+                                                                                                  jointType "rotate"
+                                                                                                  jointAxis 0.0 0.0 1.0
+                                                                                                  jointId 22
+                                                                                                  translation 0 0.0 -0.05
+                                                                                                  rotation 0 1 0 0
+                                                                                                  ulimit 1e+16
+                                                                                                  llimit -1e+16
+                                                                                                  children [
+                                                                                                    USE YawPart
+                                                                                                        
+                                                                                                    DEF hinge_L33ND2S3WD Joint {
+                                                                                                      jointType "rotate"
+                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                      jointId 23
+                                                                                                      translation 0 0 -0.05
+                                                                                                      rotation -1.0 0 0 1.5708
+                                                                                                      ulimit 3.67
+                                                                                                      llimit -0.53
+                                                                                                      children [
+                                                                                                        USE RollPart
+                                                                                                            
+                                                                                                        DEF hinge_S3WD2S3ND Joint {
+                                                                                                          jointType "rotate"
+                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                          jointId 24
+                                                                                                          translation 0 0 -0.05
+                                                                                                          rotation 0 1 0 0
+                                                                                                          ulimit 1e+16
+                                                                                                          llimit -1e+16
+                                                                                                          children [
+                                                                                                            USE YawPart
+                                                                                                                
+                                                                                                            DEF hinge_S3ND2L41WD Joint {
+                                                                                                              jointType "rotate"
+                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                              jointId 25
+                                                                                                              translation 0 0 -0.05
+                                                                                                              rotation -1.0 0 0 1.57079530718
+                                                                                                              ulimit 3.67
+                                                                                                              llimit -0.53
+                                                                                                              children [
+                                                                                                                USE RollPart
+                                                                                                                    
+                                                                                                                DEF hinge_L41WD2L41ND Joint {
+                                                                                                                  jointType "rotate"
+                                                                                                                  jointAxis 0.0 0 1
+                                                                                                                  jointId 26
+                                                                                                                  translation 0.0 0 -0.05
+                                                                                                                  rotation 0 1 0 0
+                                                                                                                  ulimit 1e+16
+                                                                                                                  llimit -1e+16
+                                                                                                                  children [
+                                                                                                                    USE YawPart
+                                                                                                                        
+                                                                                                                    DEF hinge_L41ND2L42WD Joint {
+                                                                                                                      jointType "rotate"
+                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                      jointId 27
+                                                                                                                      translation 0 0 -0.05
+                                                                                                                      rotation 0 1 0 0
+                                                                                                                      ulimit 2.1
+                                                                                                                      llimit -2.1
+                                                                                                                      children [
+                                                                                                                        USE RollPart
+                                                                                                                            
+                                                                                                                        DEF hinge_L42WD2L42ND Joint {
+                                                                                                                          jointType "rotate"
+                                                                                                                          jointAxis 0.0 0 1
+                                                                                                                          jointId 28
+                                                                                                                          translation 0 0 -0.05
+                                                                                                                          rotation 0 1 0 0
+                                                                                                                          ulimit 1e+16
+                                                                                                                          llimit -1e+16
+                                                                                                                          children [
+                                                                                                                            USE YawPart
+                                                                                                                                
+                                                                                                                            DEF hinge_L42ND2L43WD Joint {
+                                                                                                                              jointType "rotate"
+                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                              jointId 29
+                                                                                                                              translation 0 0 -0.05
+                                                                                                                              rotation 0 1 0 0
+                                                                                                                              ulimit 2.1
+                                                                                                                              llimit -2.1
+                                                                                                                              children [
+                                                                                                                                USE RollPart
+                                                                                                                                    
+                                                                                                                                DEF hinge_L43WD2L43ND Joint {
+                                                                                                                                  jointType "rotate"
+                                                                                                                                  jointAxis 0.0 0 1
+                                                                                                                                  jointId 30
+                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                  ulimit 1e+16
+                                                                                                                                  llimit -1e+16
+                                                                                                                                  children [
+                                                                                                                                    USE YawPart
+                                                                                                                                        
+                                                                                                                                    DEF hinge_L43ND2S4WD Joint {
+                                                                                                                                      jointType "rotate"
+                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                      jointId 31
+                                                                                                                                      translation 0 0 -0.05
+                                                                                                                                      rotation 1.0 0 0 1.57079530718
+                                                                                                                                      ulimit 0.53
+                                                                                                                                      llimit -3.67
+                                                                                                                                      children [
+                                                                                                                                        USE RollPart
+                                                                                                                                            
+                                                                                                                                        DEF hinge_S4WD2S4ND Joint {
+                                                                                                                                          jointType "rotate"
+                                                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                                                          jointId 32
+                                                                                                                                          translation 0 0 -0.05
+                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                          ulimit 1e+16
+                                                                                                                                          llimit -1e+16
+                                                                                                                                          children [
+                                                                                                                                            USE YawPart
+                                                                                                                                                
+                                                                                                                                            DEF hinge_S4ND2L51WD Joint {
+                                                                                                                                              jointType "rotate"
+                                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                                              jointId 33
+                                                                                                                                              translation 0 0 -0.05
+                                                                                                                                              rotation 1.0 0 0 1.5708
+                                                                                                                                              ulimit 2.1
+                                                                                                                                              llimit -2.1
+                                                                                                                                              children [
+                                                                                                                                                USE RollPart
+                                                                                                                                                    
+                                                                                                                                                DEF hinge_L51WD2L51ND Joint {
+                                                                                                                                                  jointType "rotate"
+                                                                                                                                                  jointAxis 0.0 0.0 1.0
+                                                                                                                                                  jointId 34
+                                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                                  ulimit 1e+16
+                                                                                                                                                  llimit -1e+16
+                                                                                                                                                  children [
+                                                                                                                                                    USE YawPart
+                                                                                                                                                        
+                                                                                                                                                    DEF hinge_L51ND2L52WD Joint {
+                                                                                                                                                      jointType "rotate"
+                                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                                      jointId 35
+                                                                                                                                                      translation 0 0 -0.05
+                                                                                                                                                      rotation 0 1 0 0
+                                                                                                                                                      ulimit 2.1
+                                                                                                                                                      llimit -2.1
+                                                                                                                                                      children [
+                                                                                                                                                        USE RollPart
+                                                                                                                                                            
+                                                                                                                                                        DEF hinge_L52WD2L52ND Joint {
+                                                                                                                                                          jointType "rotate"
+                                                                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                                                                          jointId 36
+                                                                                                                                                          translation 0 0 -0.05
+                                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                                          ulimit 1e+16
+                                                                                                                                                          llimit -1e+16
+                                                                                                                                                          children [
+                                                                                                                                                            USE YawPart
+                                                                                                                                                                
+                                                                                                                                                            DEF hinge_L52ND2L53WD Joint {
+                                                                                                                                                              jointType "rotate"
+                                                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                                                              jointId 37
+                                                                                                                                                              translation 0 0 -0.05
+                                                                                                                                                              rotation 0 1 0 0
+                                                                                                                                                              ulimit 2.1
+                                                                                                                                                              llimit -2.1
+                                                                                                                                                              children [
+                                                                                                                                                                USE RollPart
+                                                                                                                                                                    
+                                                                                                                                                                DEF hinge_L53WD2L53ND Joint {
+                                                                                                                                                                  jointType "rotate"
+                                                                                                                                                                  jointAxis 0.0 0.0 1.0
+                                                                                                                                                                  jointId 38
+                                                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                                                  ulimit 1e+16
+                                                                                                                                                                  llimit -1e+16
+                                                                                                                                                                  children [
+                                                                                                                                                                    USE YawPart
+                                                                                                                                                                        
+                                                                                                                                                                    DEF hinge_L53ND2S5WD Joint {
+                                                                                                                                                                      jointType "rotate"
+                                                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                                                      jointId 39
+                                                                                                                                                                      translation 0.0 0 -0.05
+                                                                                                                                                                      rotation -1.0 0 0 1.5708
+                                                                                                                                                                      ulimit 3.67
+                                                                                                                                                                      llimit -0.53
+                                                                                                                                                                      children [
+                                                                                                                                                                        USE RollPart
+                                                                                                                                                                            
+                                                                                                                                                                        DEF hinge_S5WD2S5ND Joint {
+                                                                                                                                                                          jointType "rotate"
+                                                                                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                                                                                          jointId 40
+                                                                                                                                                                          translation 0 0 -0.05
+                                                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                                                          ulimit 1e+16
+                                                                                                                                                                          llimit -1e+16
+                                                                                                                                                                          children [
+                                                                                                                                                                            USE YawPart
+                                                                                                                                                                                
+                                                                                                                                                                            DEF hinge_S5ND2L61WD Joint {
+                                                                                                                                                                              jointType "rotate"
+                                                                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                                                                              jointId 41
+                                                                                                                                                                              translation 0 0 -0.05
+                                                                                                                                                                              rotation -1.0 0 0 1.57079530718
+                                                                                                                                                                              ulimit 3.67
+                                                                                                                                                                              llimit -0.53
+                                                                                                                                                                              children [
+                                                                                                                                                                                USE RollPart
+                                                                                                                                                                                    
+                                                                                                                                                                                DEF hinge_L61WD2L61ND Joint {
+                                                                                                                                                                                  jointType "rotate"
+                                                                                                                                                                                  jointAxis 0.0 0 1
+                                                                                                                                                                                  jointId 42
+                                                                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                                                                  ulimit 1e+16
+                                                                                                                                                                                  llimit -1e+16
+                                                                                                                                                                                  children [
+                                                                                                                                                                                    USE YawPart 
+                                                                                                                                                                                    
+                                                                                                                                                                                    DEF hinge_L61ND2L62WD Joint {
+                                                                                                                                                                                      jointType "rotate"
+                                                                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                                                                      jointId 43
+                                                                                                                                                                                      translation 0 0 -0.05
+                                                                                                                                                                                      rotation 0 1 0 0
+                                                                                                                                                                                      ulimit 2.1
+                                                                                                                                                                                      llimit -2.1
+                                                                                                                                                                                      children [
+                                                                                                                                                                                        USE RollPart 
+                                                                                                                                  
+                                                                                                                                                                                        DEF hinge_L62WD2L62ND Joint {
+                                                                                                                                                                                          jointType "rotate"
+                                                                                                                                                                                          jointAxis 0.0 0 1
+                                                                                                                                                                                          jointId 44
+                                                                                                                                                                                          translation 0 0 -0.05
+                                                                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                                                                          ulimit 1e+16
+                                                                                                                                                                                          llimit -1e+16
+                                                                                                                                                                                          children [
+                                                                                                                                                                                            USE YawPart
+                                                                                                                                                                                                
+                                                                                                                                                                                            DEF hinge_L62ND2L63WD Joint {
+                                                                                                                                                                                              jointType "rotate"
+                                                                                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                                                                                              jointId 45
+                                                                                                                                                                                              translation 0 0 -0.05
+                                                                                                                                                                                              rotation 0 1 0 0
+                                                                                                                                                                                              ulimit 2.1
+                                                                                                                                                                                              llimit -2.1
+                                                                                                                                                                                              children [
+                                                                                                                                                                                                USE RollPart
+                                                                                                                                                                                                    
+                                                                                                                                                                                                DEF hinge_L63WD2L63ND Joint {
+                                                                                                                                                                                                  jointType "rotate"
+                                                                                                                                                                                                  jointAxis 0.0 0 1
+                                                                                                                                                                                                  jointId 46
+                                                                                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                                                                                  ulimit 1e+16
+                                                                                                                                                                                                  llimit -1e+16
+                                                                                                                                                                                                  children [
+                                                                                                                                                                                                    USE YawPart
+                                                                                                                                                                                                        
+                                                                                                                                                                                                    DEF hinge_L63ND2S6WD Joint {
+                                                                                                                                                                                                      jointType "rotate"
+                                                                                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                                                                                      jointId 47
+                                                                                                                                                                                                      translation 0.0 0 -0.05
+                                                                                                                                                                                                      rotation 1.0 0 0 1.57079530718
+                                                                                                                                                                                                      ulimit 0.53
+                                                                                                                                                                                                      llimit -3.67
+                                                                                                                                                                                                      children [
+                                                                                                                                                                                                        USE RollPart
+                                                                                                                                                                                                            
+                                                                                                                                                                                                        DEF hinge_S6WD2S6ND Joint {
+                                                                                                                                                                                                          jointType "rotate"
+                                                                                                                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                                                                                                                          jointId 48
+                                                                                                                                                                                                          translation 0 0 -0.05
+                                                                                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                                                                                          ulimit 1e+16
+                                                                                                                                                                                                          llimit -1e+16
+                                                                                                                                                                                                          children [
+                                                                                                                                                                                                            USE YawPart
+                                                                                                                                                                                                                
+                                                                                                                                                                                                            DEF hinge_S6ND2L71WD Joint {
+                                                                                                                                                                                                              jointType "rotate"
+                                                                                                                                                                                                              jointAxis 1.0 0.0 0.0
+                                                                                                                                                                                                              jointId 49
+                                                                                                                                                                                                              translation 0 0 -0.05
+                                                                                                                                                                                                              rotation 1.0 0 0 1.5708
+                                                                                                                                                                                                              ulimit 2.1
+                                                                                                                                                                                                              llimit -2.1
+                                                                                                                                                                                                              children [
+                                                                                                                                                                                                                USE RollPart
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                DEF hinge_L71WD2L71ND Joint {
+                                                                                                                                                                                                                  jointType "rotate"
+                                                                                                                                                                                                                  jointAxis 0.0 0.0 1.0
+                                                                                                                                                                                                                  jointId 50
+                                                                                                                                                                                                                  translation 0 0 -0.05
+                                                                                                                                                                                                                  rotation 0 1 0 0
+                                                                                                                                                                                                                  ulimit 1e+16
+                                                                                                                                                                                                                  llimit -1e+16
+                                                                                                                                                                                                                  children [
+                                                                                                                                                                                                                    USE YawPart
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                    DEF hinge_L71ND2L72WD Joint {
+                                                                                                                                                                                                                      jointType "rotate"
+                                                                                                                                                                                                                      jointAxis 1.0 0.0 0.0
+                                                                                                                                                                                                                      jointId 51
+                                                                                                                                                                                                                      translation 0 0 -0.05
+                                                                                                                                                                                                                      rotation 0 1 0 0
+                                                                                                                                                                                                                      ulimit 2.1
+                                                                                                                                                                                                                      llimit -2.1
+                                                                                                                                                                                                                      children [
+                                                                                                                                                                                                                        USE RollPart
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                                        DEF hinge_L72WD2L72ND Joint {
+                                                                                                                                                                                                                          jointType "rotate"
+                                                                                                                                                                                                                          jointAxis 0.0 0.0 1.0
+                                                                                                                                                                                                                          jointId 52
+                                                                                                                                                                                                                          translation 0 0  -0.05
+                                                                                                                                                                                                                          rotation 0 1 0 0
+                                                                                                                                                                                                                          ulimit 1e+16
+                                                                                                                                                                                                                          llimit -1e+16
+                                                                                                                                                                                                                          children [
+                                                                                                                                                                                                                            DEF L72ND Segment {
+                                                                                                                                                                                                                              mass 0.5
+                                                                                                                                                                                                                              centerOfMass 0.0 0.0 -0.1
+                                                                                                                                                                                                                              momentsOfInertia [0.00174 0.0 0.0 0.0 0.00174 0.0 0.0 0.0 0.000156]
+                                                                                                                                                                                                                              children [
+                                                                                                                                                                                                                                Transform {
+                                                                                                                                                                                                                                  scale 1.0 1.0 1.0
+                                                                                                                                                                                                                                  translation 0.0 0.0 0.0
+                                                                                                                                                                                                                                  rotation 1.0 -0.0 -0.0 3.14160344686
+                                                                                                                                                                                                                                  children [
+                                                                                                                                                                                                                                    Inline {
+                                                                                                                                                                                                                                      url "shape/L72ND-visual.wrl"
+                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                              ]
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                                          ]
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                              ]
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                          ]
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                      ]
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                  ]
+                                                                                                                                                                                                }
+                                                                                                                                                                                              ]
+                                                                                                                                                                                            }
+                                                                                                                                                                                          ]
+                                                                                                                                                                                        }
+                                                                                                                                                                                      ]
+                                                                                                                                                                                    }
+                                                                                                                                                                                  ]
+                                                                                                                                                                                }
+                                                                                                                                                                              ]
+                                                                                                                                                                            }
+                                                                                                                                                                          ]
+                                                                                                                                                                        }
+                                                                                                                                                                      ]
+                                                                                                                                                                    }
+                                                                                                                                                                  ]
+                                                                                                                                                                }
+                                                                                                                                                              ]
+                                                                                                                                                            }
+                                                                                                                                                          ]
+                                                                                                                                                        }
+                                                                                                                                                      ]
+                                                                                                                                                    }
+                                                                                                                                                  ]
+                                                                                                                                                }
+                                                                                                                                              ]
+                                                                                                                                            }
+                                                                                                                                          ]
+                                                                                                                                        }
+                                                                                                                                      ]
+                                                                                                                                    }
+                                                                                                                                  ]
+                                                                                                                                }
+                                                                                                                              ]
+                                                                                                                            }
+                                                                                                                          ]
+                                                                                                                        }
+                                                                                                                      ]
+                                                                                                                    }
+                                                                                                                  ]
+                                                                                                                }
+                                                                                                              ]
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      ]
+                                                                                                    }
+                                                                                                  ]
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          ]
+                                                                                        }
+                                                                                      ]
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            }
+                                                          ]
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  joints [
+    USE hinge_L72WD2L72ND,
+    USE hinge_L71ND2L72WD,
+    USE hinge_L71WD2L71ND,
+    USE hinge_S6ND2L71WD,
+    USE hinge_S6WD2S6ND,
+    USE hinge_L63ND2S6WD,
+    USE hinge_L63WD2L63ND,
+    USE hinge_L62ND2L63WD,
+    USE hinge_L62WD2L62ND,
+    USE hinge_L61ND2L62WD,
+    USE hinge_L61WD2L61ND,
+    USE hinge_S5ND2L61WD,
+    USE hinge_S5WD2S5ND,
+    USE hinge_L53ND2S5WD,
+    USE hinge_L53WD2L53ND,
+    USE hinge_L52ND2L53WD,
+    USE hinge_L52WD2L52ND,
+    USE hinge_L51ND2L52WD,
+    USE hinge_L51WD2L51ND,
+    USE hinge_S4ND2L51WD,
+    USE hinge_S4WD2S4ND,
+    USE hinge_L43ND2S4WD,
+    USE hinge_L43WD2L43ND,
+    USE hinge_L42ND2L43WD,
+    USE hinge_L42WD2L42ND,
+    USE hinge_L41ND2L42WD,
+    USE hinge_L41WD2L41ND,
+    USE hinge_S3ND2L41WD,
+    USE hinge_S3WD2S3ND,
+    USE hinge_L33ND2S3WD,
+    USE hinge_L33WD2L33ND,
+    USE hinge_L32ND2L33WD,
+    USE hinge_L32WD2L32ND,
+    USE hinge_L31ND2L32WD,
+    USE hinge_L31WD2L31ND,
+    USE hinge_S2ND2L31WD,
+    USE hinge_S2WD2S2ND,
+    USE hinge_L23ND2S2WD,
+    USE hinge_L23WD2L23ND,
+    USE hinge_L22ND2L23WD,
+    USE hinge_L22WD2L22ND,
+    USE hinge_L21ND2L22WD,
+    USE hinge_L21WD2L21ND,
+    USE hinge_S1ND2L21WD,
+    USE hinge_S1WD2S1ND,
+    USE hinge_L13ND2S1WD,
+    USE hinge_L13WD2L13ND,
+    USE hinge_L12ND2L13WD,
+    USE hinge_L12WD2L12ND,
+    USE hinge_L11ND2L12WD,
+    USE hinge_L11WD2L11ND,
+    USE hinge_1st2L11WD,
+    USE hinge_hose0
+  ]
+  
+  name "hose"
+  version "1.0"
+}

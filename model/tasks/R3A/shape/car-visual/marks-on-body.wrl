@@ -1,0 +1,59 @@
+#VRML V2.0 utf8
+#modeled using blender3d http://blender.org
+
+# 'ShapeIndexedFaceSet.283'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.327830 10.943600 0.873017 4.321290 10.988400 0.840200 4.330920 10.997200 0.888458 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.64 0.64 0.00 ]
+		}
+		colorIndex [ 0 ]
+		coordIndex [ 1 2 3 -1 ]
+	}
+}
+
+# 'ShapeIndexedFaceSet.282'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.296350 10.963600 1.112881 4.303530 11.013700 1.089121 4.287960 11.013499 1.136642 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.64 0.64 0.00 ]
+		}
+		colorIndex [ 0 ]
+		coordIndex [ 1 2 3 -1 ]
+	}
+}
+
+# 'ShapeIndexedFaceSet.281'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.340700 9.953960 1.064691 4.337140 9.906370 1.093811 4.343560 9.901940 1.044421 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.64 0.64 0.00 ]
+		}
+		colorIndex [ 0 ]
+		coordIndex [ 1 2 3 -1 ]
+	}
+}
