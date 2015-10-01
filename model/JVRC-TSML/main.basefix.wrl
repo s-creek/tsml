@@ -225,12 +225,12 @@ Viewpoint {
   orientation 0.5770 0.5775 0.5775 2.0935
 }
 
-DEF JVRC-1 Humanoid {
+DEF JVRC-State Humanoid {
   humanoidBody [
     DEF PELVIS Joint {
       #jointType "free"
       jointType "fixed"
-      translation 0 0 0.854
+      translation 0 0 0
       children [
         DEF PELVIS_S Segment {
 	  mass 10
@@ -353,7 +353,7 @@ DEF JVRC-1 Humanoid {
 				  children [
 				    #Inline { url "rfoot.wrl" }
 				    #Inline { url "jvrc_new_foot/foot.vr2.wrl" }
-				    Inline { url "../JAXON_JVRC/RLEG_LINK5.wrl" }
+				    Inline { url "RLEG_LINK5.wrl" }
 				  ]
 				}
 				DEF rfsensor ForceSensor {
@@ -478,7 +478,7 @@ DEF JVRC-1 Humanoid {
 				  children [
 				    #Inline { url "lfoot.wrl" }
 				    #Inline { url "jvrc_new_foot/foot.vr2.wrl" }
-				    Inline { url "../JAXON_JVRC/LLEG_LINK5.wrl" }
+				    Inline { url "LLEG_LINK5.wrl" }
 				  ]
 				}
 				DEF lfsensor ForceSensor {

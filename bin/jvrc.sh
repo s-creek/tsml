@@ -12,7 +12,7 @@ TASK_DIR=/home/player/tsml/model/tasks
 #/usr/bin/choreonoid $@ #--start-simulation
 #/usr/bin/choreonoid $@ 2>&1 | tee log.dat
 
-/usr/bin/choreonoid ${TASK_DIR}/O1/O1.cnoid
+#/usr/bin/choreonoid ${TASK_DIR}/O1/O1.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/O2/O2.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R11L/R11L.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R11M/R11M.cnoid
@@ -23,3 +23,5 @@ TASK_DIR=/home/player/tsml/model/tasks
 #/usr/bin/choreonoid ${TASK_DIR}/R3B/R3B.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R4/R4.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R5/R5.cnoid
+
+/usr/bin/choreonoid ../etc/RobotState.cnoid

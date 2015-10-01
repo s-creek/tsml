@@ -291,7 +291,7 @@ def initCORBA():
 #
 def getRootNamingContext(corbaloc):
 	props = System.getProperties()
-	
+
 	args = ["-ORBInitRef", corbaloc]
 	orb = ORB.init(args, props)
 
