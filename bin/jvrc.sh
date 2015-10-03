@@ -24,4 +24,5 @@ TASK_DIR=/home/player/tsml/model/tasks
 #/usr/bin/choreonoid ${TASK_DIR}/R4/R4.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R5/R5.cnoid
 
-/usr/bin/choreonoid ../etc/RobotState.cnoid
+#/usr/bin/choreonoid ../etc/RobotState.cnoid
+/usr/bin/choreonoid ../etc/QrCodeTest.cnoid
