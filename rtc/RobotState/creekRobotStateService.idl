@@ -1,0 +1,8 @@
+// -*- mode: idl; indent-tabs-mode: t; tab-width: 4; c-basic-offset: 4; -*-
+
+module OpenHRP {
+  interface creekRobotStateService
+  {
+    void test();
+  };
+};

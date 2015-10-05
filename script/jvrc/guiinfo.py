@@ -8,6 +8,8 @@ funcList = [
   goInital,
   goHalfSitting,
   " ",
+  ["move pos rel", movePosRel, "io", "0 0 -0.1"],
+  " ",
   neck,
   ["setJointAngle", setJointAngle, "io", "NECK_Y 30 3.0"],
   " ",
@@ -34,4 +36,8 @@ funcList = [
   " ",
   pclDetectLandingPointR,
   pclDetectLandingPointL,
+  "\n",
+  "arm",
+  rarmActive,
+  larmActive,
 ]

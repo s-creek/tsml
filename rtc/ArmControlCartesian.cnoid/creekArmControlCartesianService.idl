@@ -1,0 +1,8 @@
+// -*- mode: idl; indent-tabs-mode: t; tab-width: 4; c-basic-offset: 4; -*-
+
+module OpenHRP {
+  interface creekArmControlCartesianService
+  {
+    void setArm(in long armId);  // 0:rarm, 1:larm, 2:none
+  };
+};

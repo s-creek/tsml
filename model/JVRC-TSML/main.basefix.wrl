@@ -737,7 +737,8 @@ DEF JVRC-State Humanoid {
 					    }
 					    DEF R_WRIST_Y Joint {
 					      jointType "rotate"
-					      jointAxis "Z"
+					      #jointAxis "Z"
+					      jointAxis "Y"
 					      jointId 24
 					      ulimit [ 2.6179938779914944] #+150
 					      llimit [-2.6179938779914944] #-150
@@ -1000,7 +1001,8 @@ DEF JVRC-State Humanoid {
 					    }
 					    DEF L_WRIST_Y Joint {
 					      jointType "rotate"
-					      jointAxis "Z"
+					      #jointAxis "Z"
+					      jointAxis "Y"
 					      jointId 37
 					      ulimit [ 2.6179938779914944] #+150
 					      llimit [-2.6179938779914944] #-150

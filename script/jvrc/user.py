@@ -54,7 +54,7 @@ def createCompsRobot(nshR, rncR):
         return
     rtcListR = [rh]
 
-    global kf, seq, seq_svc, sh, wpg, wpg_svc, st, st_svc
+    global kf, seq, seq_svc, sh, wpg, wpg_svc, st, st_svc, arm, arm_svc
     kf = initRTC("creekStateEstimator", "kf", ms)
     if kf != None:
         rtcListR.append(kf)
@@ -68,6 +68,11 @@ def createCompsRobot(nshR, rncR):
     if wpg != None:
         wpg_svc = OpenHRP.sonyServiceHelper.narrow(wpg.service("service0"))
         rtcListR.append(wpg)
+
+    arm = initRTC("creekArmControlCartesian", "arm", ms)
+    if arm != None:
+        arm_svc = OpenHRP.creekArmControlCartesianServiceHelper.narrow(arm.service("service0"))
+        rtcListR.append(arm)
 
     sh  = initRTC("creekReferenceHolder", "holder", ms)
     if sh != None:
@@ -97,19 +102,24 @@ def createCompsConsole(nshC, rncC):
             return
 
     global camera, camera_svc, stick, pcl, pcl_svc
-    camera = initRTC("creekCameraViewer", "camera", msC)
-    if camera != None:
-        camera_svc = OpenHRP.creekCameraViewerServiceHelper.narrow(camera.service("service0"))
-        rtcListC.append(camera)
+    camera = None
+    stick = None
+    pcl = None
+    
+
+    # camera = initRTC("creekCameraViewer", "camera", msC)
+    # if camera != None:
+    #     camera_svc = OpenHRP.creekCameraViewerServiceHelper.narrow(camera.service("service0"))
+    #     rtcListC.append(camera)
 
     stick = initRTC("GamepadRTC", "stick", msC)
     if stick != None:
         rtcListC.append(stick)
 
-    pcl = initRTC("creekPointCloudViewer", "pcl", msC)
-    if pcl != None:
-        pcl_svc = OpenHRP.creekPointCloudViewerServiceHelper.narrow(pcl.service("service0"))
-        rtcListC.append(pcl)
+    # pcl = initRTC("creekPointCloudViewer", "pcl", msC)
+    # if pcl != None:
+    #     pcl_svc = OpenHRP.creekPointCloudViewerServiceHelper.narrow(pcl.service("service0"))
+    #     rtcListC.append(pcl)
 
     #return rtcList
 
@@ -175,8 +185,8 @@ def connectComps():
     if stick != None:
         rtm.connectPorts(stick.port("axes"), wpg.port("axes"))
         rtm.connectPorts(stick.port("buttons"), wpg.port("buttons"))
-        rtm.connectPorts(stick.port("axes"), pcl.port("axes"))
-        rtm.connectPorts(stick.port("buttons"), pcl.port("buttons"))
+        #rtm.connectPorts(stick.port("axes"), pcl.port("axes"))
+        #rtm.connectPorts(stick.port("buttons"), pcl.port("buttons"))
         
     if pcl != None:
         rtm.connectPorts(rh.port("ranger"), pcl.port("ranger"))
@@ -190,6 +200,15 @@ def connectComps():
         rtm.connectPorts(pcl.port("baseRpyOut"), sh.port("baseRpyIn"))
         rtm.connectPorts(pcl.port("basePosOut"), sh.port("basePosIn"))
 
+    if arm != None:
+        rtm.connectPorts(sh.port("qOut"),        arm.port("qCur"))
+        rtm.connectPorts(sh.port("basePosOut"),  arm.port("basePos"))
+        rtm.connectPorts(sh.port("baseRpyOut"),  arm.port("baseRpy"))
+        rtm.connectPorts(stick.port("axes"),     arm.port("axes"))
+        rtm.connectPorts(stick.port("buttons"),  arm.port("buttons"))
+        rtm.connectPorts(arm.port("qRef"),       sh.port("qIn"))
+
+
 def setupLogger():
     print "dummy"
 
@@ -199,16 +218,21 @@ def saveLog(fname='sample'):
 def goInital():
     tm = bodyinfo.timeToInitialPose
     seq_svc.setJointAngles(bodyinfo.makeCommandPose(bodyinfo.initialPose), tm)
-    seq_svc.setBasePos([0.0, 0.0, bodyinfo.initialWaistHeight], tm)
-    seq_svc.setZmp([0.0, 0.0, -bodyinfo.initialWaistHeight], tm)
+    #seq_svc.setBasePos([0.0, 0.0, bodyinfo.initialWaistHeight], tm)
+    #seq_svc.setZmp([0.0, 0.0, -bodyinfo.initialWaistHeight], tm)
     seq_svc.waitInterpolation()
 
 def goHalfSitting():
     tm = bodyinfo.timeToHalfsitPose
     seq_svc.setJointAngles(bodyinfo.makeCommandPose(bodyinfo.halfsitPose), tm)
-    seq_svc.setBasePos(bodyinfo.halfsitBasePos, tm)
-    seq_svc.setZmp([0.023, 0, -bodyinfo.halfsitBasePos[2] ], tm)
+    #seq_svc.setBasePos(bodyinfo.halfsitBasePos, tm)
+    #seq_svc.setZmp([0.023, 0, -bodyinfo.halfsitBasePos[2] ], tm)
     seq_svc.waitInterpolation()
+
+def movePosRel(x):
+    itemlist = x.split()
+    n = [ float(item) for item in itemlist ]
+    seq_svc.setBasePosRel(n, 3)
 
 def searchOn():
     camera_svc.setSearchFlag("all")
@@ -328,6 +352,12 @@ def pclGetLandingPointL():
 def cameraSave(x):
     path = "/home/player/tsml/log/"+x
     camera_svc.saveData(path)
+
+def rarmActive():
+    arm_svc.setArm(0)
+
+def larmActive():
+    arm_svc.setArm(1)
 
 
 if __name__ == '__main__' or __name__ == 'main':

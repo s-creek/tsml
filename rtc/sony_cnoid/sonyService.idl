@@ -1,0 +1,22 @@
+// -*- mode: idl; indent-tabs-mode: t; tab-width: 4; c-basic-offset: 4; -*-
+
+
+module OpenHRP {
+	
+	//enum ControlType { FORCE, POSITION };
+
+	interface sonyService
+	{
+		void start();
+		void setObjectV(in double x, in double y,in double z,in double roll,in double pitch,in double yaw);
+		void testMove();
+		void stepping();
+		void stop();
+		void omniWalkSwitch();
+
+		void setFootPosR2();
+		void setFootPosL2();
+		void setFootPosR(in double x, in double y, in double z, in double r, in double p, in double w);
+		void setFootPosL(in double x, in double y, in double z, in double r, in double p, in double w);
+	};
+};

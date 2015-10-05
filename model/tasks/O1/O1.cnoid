@@ -34,9 +34,9 @@ items:
               -0.000001, -0.000000, -0.000001, -0.000000 ]
             initialRootPosition: [ 3.24, 2.49, 1.2018 ]
             initialRootAttitude: [ 
-              -2.54872358e-07, -1, 4.67933344e-07, 
-              0.999999733, -2.5521439e-07, -0.000731088081, 
-              0.000731088081, 4.67746975e-07, 0.999999733 ]
+              -2.54994941e-07, -1, 4.67933449e-07, 
+              0.999999733, -2.55336973e-07, -0.000731088081, 
+              0.000731088081, 4.6774699e-07, 0.999999733 ]
             initialJointPositions: [ 
               -0.000063, -0.000001, -0.000000, -0.000437, -0.000000,  0.001233, -0.000062, -0.000000, -0.000000, -0.000437, 
               -0.000002,  0.001231, -0.000000,  0.000287,  0.000000, -0.000000,  0.000000,  0.000558, -0.000081, -0.000027, 
@@ -350,7 +350,7 @@ items:
             realtimeSync: true
             recording: full
             timeRangeMode: TimeBar range
-            onlyActiveControlPeriod: true
+            onlyActiveControlPeriod: false
             timeLength: 600
             allLinkPositionOutputMode: false
             deviceStateOutput: true
@@ -378,8 +378,6 @@ items:
               data: 
                 enabled: true
                 info: "O1.yaml"
-                recordFile: R_TEAM_O1-1
-                remainingTimeOutputFilename: jvrc-remaining-time.txt
             - 
               id: 18
               name: "GLVisionSimulator"
@@ -416,7 +414,7 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      selected: [ 18 ]
+      selected: [ 16 ]
       checked: [ 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
       expanded: [ 1, 2, 3, 16 ]
   - 
