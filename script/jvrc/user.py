@@ -107,19 +107,19 @@ def createCompsConsole(nshC, rncC):
     pcl = None
     
 
-    # camera = initRTC("creekCameraViewer", "camera", msC)
-    # if camera != None:
-    #     camera_svc = OpenHRP.creekCameraViewerServiceHelper.narrow(camera.service("service0"))
-    #     rtcListC.append(camera)
+    camera = initRTC("creekCameraViewer", "camera", msC)
+    if camera != None:
+        camera_svc = OpenHRP.creekCameraViewerServiceHelper.narrow(camera.service("service0"))
+        rtcListC.append(camera)
 
     stick = initRTC("GamepadRTC", "stick", msC)
     if stick != None:
         rtcListC.append(stick)
 
-    # pcl = initRTC("creekPointCloudViewer", "pcl", msC)
-    # if pcl != None:
-    #     pcl_svc = OpenHRP.creekPointCloudViewerServiceHelper.narrow(pcl.service("service0"))
-    #     rtcListC.append(pcl)
+    pcl = initRTC("creekPointCloudViewer", "pcl", msC)
+    if pcl != None:
+        pcl_svc = OpenHRP.creekPointCloudViewerServiceHelper.narrow(pcl.service("service0"))
+        rtcListC.append(pcl)
 
     #return rtcList
 
@@ -185,8 +185,8 @@ def connectComps():
     if stick != None:
         rtm.connectPorts(stick.port("axes"), wpg.port("axes"))
         rtm.connectPorts(stick.port("buttons"), wpg.port("buttons"))
-        #rtm.connectPorts(stick.port("axes"), pcl.port("axes"))
-        #rtm.connectPorts(stick.port("buttons"), pcl.port("buttons"))
+        rtm.connectPorts(stick.port("axes"), pcl.port("axes"))
+        rtm.connectPorts(stick.port("buttons"), pcl.port("buttons"))
         
     if pcl != None:
         rtm.connectPorts(rh.port("ranger"), pcl.port("ranger"))
@@ -359,6 +359,34 @@ def rarmActive():
 def larmActive():
     arm_svc.setArm(1)
 
+def setArmVelocity(x):
+    itemlist = x.split()
+    n = [ float(item) for item in itemlist ]
+    arm_svc.setVelocity(n[0], n[1], n[2])
+
+def gamepadWalk():
+    pcl_svc.detectModeOff()
+    arm_svc.setArm(2)
+    time.sleep(1)
+    wpg_svc.omniWalkSwitchOn()
+
+def gamepadPcl():
+    arm_svc.setArm(2)
+    wpg_svc.omniWalkSwitchOff()
+    time.sleep(1)
+    pcl_svc.detectModeOn()
+
+def gamepadArmR():
+    pcl_svc.detectModeOff()
+    wpg_svc.omniWalkSwitchOff()
+    time.sleep(1)
+    arm_svc.setArm(0)
+
+def gamepadArmL():
+    pcl_svc.detectModeOff()
+    wpg_svc.omniWalkSwitchOff()
+    time.sleep(1)
+    arm_svc.setArm(1)
 
 if __name__ == '__main__' or __name__ == 'main':
     if len(sys.argv) > 1:

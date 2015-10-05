@@ -84,8 +84,10 @@ RTC::ReturnCode_t creekArmControlCartesian::onInitialize()
 
   m_robot->calcForwardKinematics();
 
-  m_rarm = getCustomJointPath(m_robot, m_robot->link("WAIST_R"), m_robot->link("R_WRIST_Y"));
-  m_larm = getCustomJointPath(m_robot, m_robot->link("WAIST_R"), m_robot->link("L_WRIST_Y"));
+  // m_rarm = getCustomJointPath(m_robot, m_robot->link("WAIST_R"), m_robot->link("R_WRIST_Y"));
+  // m_larm = getCustomJointPath(m_robot, m_robot->link("WAIST_R"), m_robot->link("L_WRIST_Y"));
+  m_rarm = getCustomJointPath(m_robot, m_robot->link(prop["RARM_BASE"]), m_robot->link(prop["RARM_END"]));
+  m_larm = getCustomJointPath(m_robot, m_robot->link(prop["LARM_BASE"]), m_robot->link(prop["LARM_END"]));
 
 
   //
@@ -545,8 +547,8 @@ void creekArmControlCartesian::calcElbowJacobian(cnoid::JointPathPtr arm, dmatri
 void creekArmControlCartesian::setTranslationVelocity(double vtrans)
 {
   double v = fabs(vtrans);
-  if( v > 0.1 )
-    v = 0.1;
+  if( v > 0.4 )
+    v = 0.4;
   m_dtrans = m_dt * v;
 }
 
@@ -554,8 +556,8 @@ void creekArmControlCartesian::setTranslationVelocity(double vtrans)
 void creekArmControlCartesian::setAngularVelocity(double vomega)
 {
   double v = fabs(vomega);
-  if( v > 1.0 )
-    v = 1.0;
+  if( v > 2.0 )
+    v = 2.0;
   m_domega = m_dt * v;
 }
 
@@ -563,8 +565,8 @@ void creekArmControlCartesian::setAngularVelocity(double vomega)
 void creekArmControlCartesian::setElbowVelocity(double velbow)
 {
   double v = fabs(velbow);
-  if( v > 1.0 )
-    v = 1.0;
+  if( v > 2.0 )
+    v = 2.0;
   m_delbow = m_dt * v;
 }
 

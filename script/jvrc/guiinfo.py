@@ -40,4 +40,11 @@ funcList = [
   "arm",
   rarmActive,
   larmActive,
+  ["set arm velocity", setArmVelocity, "io", "0.04 0.2 0.2"],
+  " ",
+  "gamepad",
+  ["walk", gamepadWalk],
+  ["PCL",  gamepadPcl],
+  ["rarm", gamepadArmR],
+  ["larm", gamepadArmL],
 ]
