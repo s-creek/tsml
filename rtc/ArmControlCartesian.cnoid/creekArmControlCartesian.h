@@ -32,6 +32,10 @@ public:
 
   void setArm(int armId);
 
+  void setTranslationVelocity(double vtrans);
+  void setAngularVelocity(double vomega);
+  void setElbowVelocity(double velbow);
+
 
 protected:
   //
@@ -61,6 +65,10 @@ protected:
 private:
   void initModel();
   bool calcInverseKinematics(cnoid::JointPathPtr arm, cnoid::Vector3 &refP, cnoid::Matrix3 &refR);
+  
+  bool calcElbowInverseKinematics(cnoid::JointPathPtr arm, cnoid::Vector3 &refP, cnoid::Matrix3 &refR, double refElbow);
+  double getElbowAngle(cnoid::JointPathPtr arm);
+  void calcElbowJacobian(cnoid::JointPathPtr arm, Eigen::MatrixXd &out_J);
 
   int m_activeArmId;
   bool m_active;
@@ -68,6 +76,10 @@ private:
   cnoid::BodyPtr m_robot;
   cnoid::JointPathPtr m_rarm, m_larm;
   cnoid::Position m_rarmRef, m_larmRef;
+  double m_relbowRef, m_lelbowRef;
+
+  double m_dt;
+  double m_dtrans, m_domega, m_delbow;
 };
 
 

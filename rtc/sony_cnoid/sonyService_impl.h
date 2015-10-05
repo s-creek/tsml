@@ -38,6 +38,8 @@ public:
   void stepping();
   void stop();
   void omniWalkSwitch();
+  void omniWalkSwitchOn();
+  void omniWalkSwitchOff();
 
   void setFootPosR2();
   void setFootPosL2();

@@ -109,6 +109,8 @@ class sony  : public hrp2Base
   void setObjectV(double x, double y, double z, double roll, double pitch, double yaw);
   void stop();
   void omniWalkSwitch();
+  void omniWalkSwitchOn();
+  void omniWalkSwitchOff();
 
   void setFootPosR();
   void setFootPosL();

@@ -48,6 +48,8 @@ public:
   void test();
 
   void changeMode();
+  void detectModeOn();
+  void detectModeOff();
   void setModelToCurrent();
   void setModelToReference();
 

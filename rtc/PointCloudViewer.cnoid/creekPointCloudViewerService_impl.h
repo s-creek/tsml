@@ -22,6 +22,8 @@ public:
   void test();
 
   void changeMode();
+  void detectModeOn();
+  void detectModeOff();
   bool autoFittinSwitch();
   void clear();
 

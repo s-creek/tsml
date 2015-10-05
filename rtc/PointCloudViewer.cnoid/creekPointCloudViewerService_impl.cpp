@@ -68,3 +68,16 @@ void creekPointCloudViewerService_impl::clear()
     m_comp->clear();
 }
 
+
+void creekPointCloudViewerService_impl::detectModeOn()
+{
+  if( m_comp != NULL )
+    m_comp->detectModeOn();
+}
+
+
+void creekPointCloudViewerService_impl::detectModeOff()
+{
+  if( m_comp != NULL )
+    m_comp->detectModeOff();
+}

@@ -219,7 +219,7 @@ RTC::ReturnCode_t creekPointCloudViewer::onActivated(RTC::UniqueId ec_id)
 
 
   m_detectMode = false;
-  m_autoFitting = true;
+  m_autoFitting = false;
   return RTC::RTC_OK;
 }
 
@@ -912,6 +912,20 @@ void creekPointCloudViewer::changeMode()
     m_detectMode = false;
     std::cout << "creekPointCloudViewer : view mode" << std::endl;
   }
+}
+
+
+void creekPointCloudViewer::detectModeOn()
+{
+  if( !m_detectMode )
+    changeMode();
+}
+
+
+void creekPointCloudViewer::detectModeOff()
+{
+  if( m_detectMode )
+    changeMode();
 }
 
 

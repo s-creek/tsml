@@ -1046,7 +1046,7 @@ void sony::testMove()
     cout<<"inv OK"<<endl;
   }
   */
-  
+  /*
   JointPathPtr C2RHAND;
   C2RHAND=getCustomJointPath(m_robot, m_robot->link("WAIST_R"), m_robot->link("R_WRIST_Y"));
   p_now[RARM]= m_robot->link("R_WRIST_Y")->p();
@@ -1067,6 +1067,7 @@ void sony::testMove()
     cout<<"inv err"<<endl;
   }
   cout<<"jj "<<C2LHAND->numJoints()<<endl;
+  */
   /*
   Interplation5(body_cur,  zero,  zero, body_ref,  zero,  zero, 3, bodyDeque_p);
   */
@@ -1286,6 +1287,13 @@ Interplation5(body_cur,  zero,  zero, body_ref,  zero,  zero, 5, bodyDeque);
   else 
     cerr<<"errrr"<<endl;
   */
+
+
+  while( !bodyDeque.empty() && !playflag ) {
+    usleep(10);
+  }
+  bodyDeque.clear();
+  usleep(10);
 }
 
 void sony::setObjectV(double x, double y, double z, double roll, double pitch, double yaw)
@@ -1351,6 +1359,20 @@ void sony::omniWalkSwitch()
   omniWalk = !omniWalk;
   cout<<"omniWalkMode "<<omniWalk<<endl;
   
+}
+
+
+void sony::omniWalkSwitchOn()
+{
+  if( !omniWalk )
+    omniWalkSwitch();
+}
+
+
+void sony::omniWalkSwitchOff()
+{
+  if( omniWalk )
+    omniWalkSwitch();
 }
 
 
