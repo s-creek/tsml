@@ -224,9 +224,7 @@ RTC::ReturnCode_t creekRobotState::onExecute(RTC::UniqueId ec_id)
     comRef = m_robotRef->calcCenterOfMass();
     comAct = m_robot->calcCenterOfMass();
     
-    std::cout << "aaa" << std::endl;
     if( m_logfile.is_open() ) {
-      std::cout << "bbb" << std::endl;
       m_logfile << toSec(m_q.tm);
       for(int i=0; i<3; i++)  m_logfile << " " << absZmpRef(i);
       for(int i=0; i<3; i++)  m_logfile << " " << absZmpAct(i);

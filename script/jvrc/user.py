@@ -427,7 +427,7 @@ def testStair():
 
 def pclSave(x):
     path = "/home/player/tsml/log/"+x
-    pcl_svc.save(x)
+    pcl_svc.save(path)
 
 
 if __name__ == '__main__' or __name__ == 'main':
