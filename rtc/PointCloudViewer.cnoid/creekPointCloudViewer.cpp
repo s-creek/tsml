@@ -401,7 +401,7 @@ void creekPointCloudViewer::start()
 }
 
 
-void creekPointCloudViewer::stop()
+bool creekPointCloudViewer::stop()
 {
   m_active = false;
 
@@ -432,22 +432,27 @@ void creekPointCloudViewer::stop()
   filter.filter(*m_cloud);
 
 
-  if( !m_world->empty() ) {
-    if( matchingMap() ) {
-      updateMap();
-    }
-    else
-      std::cout << "creekPointCloudViewer : matching map error" << std::endl;
+  bool needUpdateMap(false);
+  if( m_world->empty() ) {
+    updateMap();
   }
   else {
-    updateMap();
+    if( matchingMap() ) {
+      //updateMap();
+      needUpdateMap = true;
+      std::cout << "creekPointCloudViewer : matching map OK" << std::endl;
+    }
+    else
+      std::cout << "creekPointCloudViewer : matching map NG" << std::endl;
   }
 
   //m_viewer->showCloud(m_cloud->makeShared());
-  m_viewer->updatePointCloud(m_cloud, "cloud");
-  m_viewer->updatePointCloud(m_world, "world");
+  //m_viewer->updatePointCloud(m_cloud, "cloud");
+  //m_viewer->updatePointCloud(m_world, "world");
   //std::cout << "creekPointCloudViewer : cloud size = " << org->size() << " (original size)" << std::endl;
   //std::cout << "creekPointCloudViewer : cloud size = " << m_cloud->size() << " (down size)" << std::endl;
+
+  return needUpdateMap;
 }
 
 
@@ -748,6 +753,11 @@ bool creekPointCloudViewer::fittingFootPosition(std::vector<int> &indices, cnoid
 
 bool creekPointCloudViewer::matchingMap()
 {
+  if( m_world->empty() || m_cloud->empty()) {
+    return false;
+  }
+
+
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr org(new pcl::PointCloud<pcl::PointXYZRGB>);
   org = m_cloud->makeShared();  // deep copy
 
@@ -793,8 +803,11 @@ bool creekPointCloudViewer::matchingMap()
     m_basePosOut.write();
     m_baseRpyOut.write();
 
-    std::cout << m_robot->rootLink()->p().format( Eigen::IOFormat(Eigen::StreamPrecision, 0, ", ", ", ", "", "", "[", "]") ) << std::endl;
-    std::cout << rpy.format( Eigen::IOFormat(Eigen::StreamPrecision, 0, ", ", ", ", "", "", "[", "]") ) << std::endl;
+     m_viewer->updatePointCloud(m_cloud, "cloud");
+
+    std::cout << "creekPointCloudViewer : matching map OK" << std::endl;
+    std::cout << "  pos = " << m_robot->rootLink()->p().format( Eigen::IOFormat(Eigen::StreamPrecision, 0, ", ", ", ", "", "", "[", "]") ) << std::endl;
+    std::cout << "  rpy = " << rpy.format( Eigen::IOFormat(Eigen::StreamPrecision, 0, ", ", ", ", "", "", "[", "]") ) << std::endl;
   }
   return icp.hasConverged();
 }
@@ -802,6 +815,9 @@ bool creekPointCloudViewer::matchingMap()
 
 void creekPointCloudViewer::updateMap()
 {
+  if( m_cloud->empty() )
+    return;
+
   try {
     m_world->insert(m_world->end(), m_cloud->begin(), m_cloud->end());
     m_cloud->clear();
@@ -942,11 +958,23 @@ bool creekPointCloudViewer::autoFittinSwitch()
 }
 
 
-void creekPointCloudViewer::clear()
+void creekPointCloudViewer::clearWorld()
 {
+  std::cout << "creekPointCloudViewer : clear world" << std::endl;
   m_world->clear();
   m_world->width  = 0;
   m_world->height = 0;
+  m_viewer->updatePointCloud(m_world, "world");
+}
+
+
+void creekPointCloudViewer::clearCloud()
+{
+  std::cout << "creekPointCloudViewer : clear cloud" << std::endl;
+  m_cloud->clear();
+  m_cloud->width  = 0;
+  m_cloud->height = 0;
+  m_viewer->updatePointCloud(m_cloud, "cloud");
 }
 
 

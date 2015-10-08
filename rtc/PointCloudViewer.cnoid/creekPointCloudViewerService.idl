@@ -3,7 +3,7 @@ module OpenHRP
  interface creekPointCloudViewerService
   {
     void start();
-    void stop();
+    boolean stop();
 
     // x,y : position,
     // w : yaw (rotate z-axis)
@@ -17,7 +17,11 @@ module OpenHRP
     void detectModeOn();
     void detectModeOff();
     boolean autoFittinSwitch();
-    void clear();
+    void clearWorld();
+    void clearCloud();
+
+    boolean matchingMap();
+    void updateMap();
 
     void save(in string name);
   };

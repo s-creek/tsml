@@ -18,10 +18,12 @@ void creekPointCloudViewerService_impl::start()
     m_comp->start();
 }
 
-void creekPointCloudViewerService_impl::stop()
+bool creekPointCloudViewerService_impl::stop()
 {
   if( m_comp != NULL )
-    m_comp->stop();
+    return m_comp->stop();
+  else
+    return false;
 }
 
 
@@ -62,10 +64,17 @@ bool creekPointCloudViewerService_impl::autoFittinSwitch()
 }
 
 
-void creekPointCloudViewerService_impl::clear()
+void creekPointCloudViewerService_impl::clearWorld()
 {
   if( m_comp != NULL )
-    m_comp->clear();
+    m_comp->clearWorld();
+}
+
+
+void creekPointCloudViewerService_impl::clearCloud()
+{
+  if( m_comp != NULL )
+    m_comp->clearCloud();
 }
 
 
@@ -86,4 +95,20 @@ void creekPointCloudViewerService_impl::save(const char *name)
 {
   if( m_comp != NULL )
     m_comp->save(name);
+}
+
+
+bool creekPointCloudViewerService_impl::matchingMap()
+{
+  if( m_comp != NULL )
+    return m_comp->matchingMap();
+  else
+    return false;
+}
+
+
+void creekPointCloudViewerService_impl::updateMap()
+{
+  if( m_comp != NULL )
+    m_comp->updateMap();
 }

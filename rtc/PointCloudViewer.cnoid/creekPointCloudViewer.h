@@ -40,7 +40,7 @@ public:
   virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
 
   void start();
-  void stop();
+  bool stop();
   bool detectLandingPoint(double x, double y, double w, int ft);
   void getLandingPoint(double &x, double &y, double &z, double &r, double &p, double &w, int ft);
   bool matchingMap();
@@ -54,7 +54,8 @@ public:
   void setModelToReference();
 
   bool autoFittinSwitch();
-  void clear();
+  void clearWorld();
+  void clearCloud();
 
   void save(std::string name);
 

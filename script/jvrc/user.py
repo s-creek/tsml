@@ -294,26 +294,28 @@ def pclStart():
 
     pcl_svc.start()
 
-    seq_svc.setJointAngle("NECK_P", deg2rad(-60), 6.0)
+    seq_svc.setJointAngle("NECK_P", deg2rad(-40), 2.0)
     seq_svc.waitInterpolation()
     
-    seq_svc.setJointAngle("NECK_P", deg2rad(0), 2.0)
+    seq_svc.setJointAngle("NECK_P", deg2rad(0), 1.0)
     seq_svc.waitInterpolation()
 
-    seq_svc.setJointAngle("WAIST_P", deg2rad(40), 4.0)
+    seq_svc.setJointAngle("WAIST_P", deg2rad(25), 1.5)
     seq_svc.waitInterpolation()
 
-    seq_svc.setJointAngle("NECK_P", deg2rad(40), 4.0)
+    seq_svc.setJointAngle("NECK_P", deg2rad(45), 2.0)
     seq_svc.waitInterpolation()
 
-    seq_svc.setJointAngle("NECK_P", deg2rad(0), 2.0)
+    seq_svc.setJointAngle("NECK_P", deg2rad(0), 1.0)
     seq_svc.waitInterpolation()
 
-    seq_svc.setJointAngle("WAIST_P", deg2rad(0), 2.0)
+    seq_svc.setJointAngle("WAIST_P", deg2rad(0), 1.5)
     seq_svc.waitInterpolation()
 
 
-    pcl_svc.stop()
+    if pcl_svc.stop():
+        if waitInputSelect("update map?"):
+            pcl_svc.updateMap()
 
     time.sleep(1)
     #wpg_svc.start()
@@ -321,17 +323,17 @@ def pclStart():
 def pclCangeMode():
     pcl_svc.changeMode()
 
-def pclDetectLandingPointR():
-    p = pclGetLandingPointR()
-    if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 0):
-        pf = pclGetLandingPointR()
-        wpg_svc.setFootPosR( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
+# def pclDetectLandingPointR():
+#     p = pclGetLandingPointR()
+#     if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 0):
+#         pf = pclGetLandingPointR()
+#         wpg_svc.setFootPosR( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
 
-def pclDetectLandingPointL():
-    p = pclGetLandingPointL()
-    if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 1):
-        pf = pclGetLandingPointL()
-        wpg_svc.setFootPosL( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
+# def pclDetectLandingPointL():
+#     p = pclGetLandingPointL()
+#     if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 1):
+#         pf = pclGetLandingPointL()
+#         wpg_svc.setFootPosL( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
 
 def pclGetLandingPointR():
     x = org.omg.CORBA.DoubleHolder()
@@ -428,6 +430,64 @@ def testStair():
 def pclSave(x):
     path = "/home/player/tsml/log/"+x
     pcl_svc.save(path)
+
+def pclClearWorld():
+    pcl_svc.clearWorld()
+
+def pclClearCloud():
+    pcl_svc.clearCloud()
+
+def pclMatchingMap():
+    pcl_svc.matchingMap()
+
+def pclUpdateMap():
+    pcl_svc.updateMap()
+
+def pclDetectLandingPointR():
+    p = pclGetLandingPointR()
+    if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 0):
+        print "detect R OK"
+
+def pclDetectLandingPointL():
+    p = pclGetLandingPointL()
+    if pcl_svc.detectLandingPoint(p[0], p[1], p[5], 1):
+        print "detect L OK"
+
+def pclSetFootPosR():
+    pf = pclGetLandingPointR()
+    wpg_svc.setFootPosR( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
+
+def pclSetFootPosL():
+    pf = pclGetLandingPointL()
+    wpg_svc.setFootPosL( pf[0], pf[1], pf[2], pf[3], pf[4], pf[5] )
+
+def pclGround():
+    wpg_svc.stop()
+    time.sleep(1)
+
+    pcl_svc.start()
+
+    seq_svc.setJointAngle("NECK_P", deg2rad(0), 1.0)
+    seq_svc.waitInterpolation()
+
+    seq_svc.setJointAngle("WAIST_P", deg2rad(25), 1.5)
+    seq_svc.waitInterpolation()
+
+    seq_svc.setJointAngle("NECK_P", deg2rad(45), 2.0)
+    seq_svc.waitInterpolation()
+
+    seq_svc.setJointAngle("NECK_P", deg2rad(0), 1.0)
+    seq_svc.waitInterpolation()
+
+    seq_svc.setJointAngle("WAIST_P", deg2rad(0), 1.5)
+    seq_svc.waitInterpolation()
+
+
+    if pcl_svc.stop():
+        if waitInputSelect("update map?"):
+            pcl_svc.updateMap()
+
+    time.sleep(1)
 
 
 if __name__ == '__main__' or __name__ == 'main':

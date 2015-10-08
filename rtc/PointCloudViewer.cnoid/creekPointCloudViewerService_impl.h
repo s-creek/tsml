@@ -16,7 +16,7 @@ public:
   virtual ~creekPointCloudViewerService_impl();
 
   void start();
-  void stop();
+  bool stop();
   bool detectLandingPoint(double x, double y, double w, int ft);
   void getLandingPoint(double &x, double &y, double &z, double &r, double &p, double &w, int ft);
   void test();
@@ -25,7 +25,11 @@ public:
   void detectModeOn();
   void detectModeOff();
   bool autoFittinSwitch();
-  void clear();
+  void clearWorld();
+  void clearCloud();
+
+  bool matchingMap();
+  void updateMap();
 
   void save(const char *name);
 
