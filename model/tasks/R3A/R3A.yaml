@@ -1,9 +1,21 @@
 tasks:
-  - name: R3_A
+  - name: R3-A
+    label: R3_A
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1
         location: [ [ 4.69, 3.035, 0.35 ], [ 1.79, 3.035, 0.35 ] ]
+      - type: action
+        label: "Hold Spreader"
+        subTaskLabel: R3-A-1
+        point: 5
+        level: 1
+      - type: action
+        label: "Remove Door"
+        subTaskLabel: R3-A-2
+        point: 9
+        level: 1
       - type: gate
         label: Gate-2
         location: [ [ 4.69, 15.05, 0.35 ], [ 1.79, 15.05, 0.35 ] ]

@@ -1,12 +1,19 @@
 tasks:
-  - name: R2_A
+  - name: R2-A
+    label: R2_AB
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1
+        subTaskLabel: R2-A
         location: [ [ 6.95, 3.1, 0.35 ], [ 1.95, 3.1, 0.35 ] ]
       - type: gate
         label: Gate-2
+        subTaskLabel: R2-B
         location: [ [ 6.95, 7.925, 0.35 ], [ 1.95, 7.925, 0.35 ] ]
+        point: 5
       - type: gate
         label: Gate-3
         location: [ [ 6.95, 13.915, 0.35 ], [ 1.95, 13.915, 0.35 ] ]
+        point: 5
+

@@ -15,54 +15,6 @@ items:
       children: 
         - 
           id: 2
-          name: "JVRC-TSML"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "../../JVRC-TSML/main.wrl"
-            currentBaseLink: "PELVIS"
-            rootPosition: [ 3.195, 2.605, 1.2018 ]
-            rootAttitude: [ 
-              6.12303177e-17, -1, 0, 
-              1, 6.12303177e-17, 0, 
-              0, 0, 1 ]
-            jointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000 ]
-            initialRootPosition: [ 3.195, 2.605, 1.2018 ]
-            initialRootAttitude: [ 
-              2.22044605e-16, -1, 0, 
-              1, 2.22044605e-16, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: true
-          children: 
-            - 
-              id: 3
-              name: "BodyRTC"
-              plugin: OpenRTM
-              class: BodyRTCItem
-              data: 
-                isImmediateMode: true
-                moduleName: "/home/player/tsml/lib/creekPdServo"
-                confFileName: "/home/player/tsml/etc/bridgeJVRC.conf"
-                configurationMode: Use Configuration File
-                AutoConnect: false
-                InstanceName: JVRC-TSML
-                bodyPeriodicRate: 0.005
-        - 
-          id: 4
           name: "box"
           plugin: Body
           class: BodyItem
@@ -86,7 +38,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 5
+          id: 3
           name: "nozzle"
           plugin: Body
           class: BodyItem
@@ -110,7 +62,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 6
+          id: 4
           name: "surface"
           plugin: Body
           class: BodyItem
@@ -133,7 +85,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 7
+          id: 5
           name: "wall"
           plugin: Body
           class: BodyItem
@@ -156,7 +108,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 8
+          id: 6
           name: "flag"
           plugin: Body
           class: BodyItem
@@ -179,7 +131,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 9
+          id: 7
           name: "hose"
           plugin: Body
           class: BodyItem
@@ -215,7 +167,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 10
+          id: 8
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -244,33 +196,12 @@ items:
             2Dmode: false
           children: 
             - 
-              id: 11
+              id: 9
               name: "JVRCManager"
               plugin: JVRC
               class: JVRCManagerItem
               data: 
-                enabled: true
                 info: "R5.yaml"
-                recordFile: 
-                remainingTimeOutputFilename: jvrc-remaining-time.txt
-            - 
-              id: 12
-              name: "GLVisionSimulator"
-              plugin: Body
-              class: GLVisionSimulatorItem
-              data: 
-                enabled: true
-                maxFrameRate: 1000
-                maxLatency: 1
-                recordVisionData: false
-                useThread: true
-                useThreadsForSensors: true
-                bestEffort: false
-                allSceneObjects: false
-                rangeSensorPrecisionRatio: 2
-                depthError: 0
-                enableHeadLight: true
-                enableAdditionalLights: true
 views: 
   - 
     id: 0
@@ -290,8 +221,8 @@ views:
     mounted: true
     state: 
       selected: [ 1 ]
-      checked: [ 2, 4, 5, 6, 7, 8, 9 ]
-      expanded: [ 1, 2, 10 ]
+      checked: [ 2, 3, 4, 5, 6, 7 ]
+      expanded: [ 1, 8 ]
   - 
     id: 3
     plugin: Base
@@ -314,7 +245,6 @@ views:
       worldLightIntensity: 0.5
       worldLightAmbient: 0.3
       additionalLights: true
-      fog: true
       floorGrid: true
       floorGridSpan: 10
       floorGridInterval: 0.5
@@ -339,9 +269,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 100
-          eye: [ 6.27901147, 0.324126996, 2.89357806 ]
-          direction: [ -0.544797694, 0.755992195, -0.362865365 ]
-          up: [ -0.212147879, 0.294388435, 0.931841578 ]
+          eye: [ 12.2691488, -6.08560474, 7.28671416 ]
+          direction: [ -0.687840643, 0.586869757, -0.42715236 ]
+          up: [ -0.324949527, 0.277248883, 0.904179662 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -380,7 +310,6 @@ views:
       spinBox: true
       slider: true
       labelOnLeft: true
-      currentBodyItem: 2
   - 
     id: 8
     plugin: Body
@@ -388,7 +317,6 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 2
   - 
     id: 9
     name: "JVRC Score"
@@ -411,18 +339,6 @@ toolbars:
     speedScale: 1
     syncToOngoingUpdates: true
     autoExpansion: true
-  "KinematicsBar": 
-    mode: AUTO
-    enablePositionDragger: true
-    penetrationBlock: false
-    collisionLinkHighlight: false
-    snapDistance: 0.025
-    penetrationBlockDepth: 0.0005
-    lazyCollisionDetectionMode: true
-  "BodyBar": 
-    current: 2
-  "LeggedBodyBar": 
-    stanceWidth: 0.15
   "BodyMotionGenerationBar": 
     autoGenerationForNewBody: true
     balancer: false
@@ -456,6 +372,16 @@ toolbars:
     waistHeightRelaxation: false
     gravity: 9.8
     dynamicsTimeRatio: 1
+  "KinematicsBar": 
+    mode: AUTO
+    enablePositionDragger: true
+    penetrationBlock: false
+    collisionLinkHighlight: false
+    snapDistance: 0.025
+    penetrationBlockDepth: 0.0005
+    lazyCollisionDetectionMode: true
+  "LeggedBodyBar": 
+    stanceWidth: 0.15
 Body: 
   "BodyMotionEngine": 
     updateJointVelocities: false
@@ -463,6 +389,11 @@ Body:
     editableSceneBodies: 
       - 
         bodyItem: 2
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 3
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
@@ -486,16 +417,6 @@ Body:
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
-      - 
-        bodyItem: 8
-        showCenterOfMass: false
-        showPpcom: false
-        showZmp: false
-      - 
-        bodyItem: 9
-        showCenterOfMass: false
-        showPpcom: false
-        showZmp: false
     staticModelEditing: false
   "KinematicFaultChecker": 
     checkJointPositions: true
@@ -508,3 +429,54 @@ Body:
     onlyTimeBarRange: false
 OpenRTM: 
   "deleteUnmanagedRTCsOnStartingSimulation": false
+viewAreas: 
+  - 
+    type: embedded
+    tabs: true
+    contents: 
+      type: splitter
+      orientation: horizontal
+      sizes: [ 326, 1588 ]
+      children: 
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 497, 496 ]
+          children: 
+            - 
+              type: pane
+              views: [ 2 ]
+              current: 2
+            - 
+              type: pane
+              views: [ 1, 8, 9 ]
+              current: 9
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 993, 0 ]
+          children: 
+            - 
+              type: splitter
+              orientation: horizontal
+              sizes: [ 0, 1582 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 6, 7, 0 ]
+                  current: 6
+                - 
+                  type: pane
+                  views: [ 4 ]
+                  current: 4
+            - 
+              type: pane
+              views: [ 3, 10 ]
+              current: 3
+layoutOfToolBars: 
+  rows: 
+    - 
+      - { name: "FileBar", x: 0, priority: 0 }
+      - { name: "TimeBar", x: 47, priority: 1 }
+      - { name: "SceneBar", x: 1661, priority: 2 }
+      - { name: "SimulationBar", x: 1726, priority: 3 }

@@ -131,7 +131,7 @@ DEF car Humanoid {
 	    Surface {
 	      visual [
 	        Transform { 
-		  translation 0.62 2.26 0.1
+		  translation 0.62 2.262 0.1
 		  children [
   	            Inline { url "shape/car-visual/body.wrl" } 
 	            Inline { url "shape/car-visual/body-glasses.wrl" } 

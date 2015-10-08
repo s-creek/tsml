@@ -1,9 +1,38 @@
 tasks:
-  - name: R4
+  - name: R4-1
+    label: R4
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1
         location: [ [ 6.13, 3.183, 0.35 ], [ 3.23, 3.183, 0.35 ] ]
+        level: 0
+      - type: action
+        label: "L-Small (A)"
+        subTaskLabel: A-1
+        point: 3
+        level: 1
+      - type: action
+        label: "L-Big (B) 1"
+        subTaskLabel: B-1
+        point: 6
+        level: 1
+      - type: action
+        label: "L-Big (B) 2"
+        subTaskLabel: B-2
+        point: 6
+        level: 1
+      - type: action
+        label: "J-Bar (C)"
+        subTaskLabel: C-1
+        point: 7
+        level: 2
+      - type: action
+        label: "L-Bar (D)"
+        subTaskLabel: D-1
+        point: 8
+        level: 2
       - type: gate
         label: Gate-2
         location: [ [ 6.13, 17.96, 0.35 ], [ 3.23, 17.96, 0.35 ] ]
+        level: 0

@@ -134,7 +134,7 @@ DEF target5 Humanoid {
           momentsOfInertia [1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0]
           children [
             Transform {
-              scale 5.0 5.0 11.0
+              scale 20.0 20.0 5.0
 	      translation 0.623 5.357 2.989
 	      rotation 3.26935015325e-07 1.0 3.26935015325e-07 1.85000265359
               children [

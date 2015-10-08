@@ -1,5 +1,7 @@
 tasks:
-  - name: O1
+  - name: O1-1
+    label: O1
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1

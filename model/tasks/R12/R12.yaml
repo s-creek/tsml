@@ -1,5 +1,7 @@
 tasks:
-  - name: R12
+  - name: R1-2
+    label: R12
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1

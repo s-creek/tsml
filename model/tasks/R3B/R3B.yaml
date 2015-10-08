@@ -1,9 +1,16 @@
 tasks:
-  - name: R3_B
+  - name: R3-B
+    label: R3_B
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1
         location: [ [ 4.59, 3.035, 0.35 ], [ 1.79, 3.035, 0.35 ] ]
+      - type: action
+        label: "Climb Ladder"
+        subTaskLabel: R3-B
+        point: 7
+        level: 1
       - type: gate
         label: Gate-2
         location: [ [ 4.79, 3.035, 0.35 ], [ 7.59, 3.035, 0.35 ] ]

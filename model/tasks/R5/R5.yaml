@@ -1,9 +1,38 @@
 tasks:
-  - name: R5
+  - name: R5-1
+    label: R5
+    timeLimit: 10
     events:
       - type: gate
         label: Gate-1
         location: [ [ 4.59, 3.61, 0.35 ], [ 1.79, 3.61, 0.35 ] ]
+        level: 0
+      - type: action
+        label: "Door"
+        subTaskLabel: R5-1
+        point: 5
+        level: 1
+      - type: action
+        label: "Hose"
+        subTaskLabel: R5-2
+        point: 5
+        level: 1
+      - type: action
+        label: "Nozzle"
+        subTaskLabel: R5-3
+        point: 3
+        level: 1
+      - type: action
+        label: "Connect"
+        subTaskLabel: R5-4
+        point: 7
+        level: 2
+      - type: action
+        label: "Valve"
+        subTaskLabel: R5-5
+        point: 7
+        level: 2
       - type: gate
         label: Gate-2
         location: [ [ 4.79, 3.61, 0.35 ], [ 7.59, 3.61, 0.35 ] ]
+        level: 0

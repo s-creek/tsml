@@ -134,9 +134,9 @@ DEF target2 Humanoid {
           momentsOfInertia [1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0]
           children [
             Transform {
-              scale 1.0 1.0 10.1
-	      translation 3.351 7.157 4.986
-	      rotation -0.0 -1.0 -0.0 1.57
+              scale 5.0 5.0 10.0
+	      translation 3.027 7.162 5.613
+	      rotation 9.58455626089e-07 0.999999999999 9.58455626089e-07 2.59999965359
               children [
                 Inline {
                   url "shape/target2-visual.wrl"

@@ -118,7 +118,7 @@ DEF debris5 Humanoid {
           children [
             Transform {
               scale 1 1 1
-              translation 0 0 0
+              translation 4.551220 12.71700 0.414
               rotation 0 1 0 0
               children [
                 Inline {

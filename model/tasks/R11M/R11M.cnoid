@@ -15,54 +15,6 @@ items:
       children: 
         - 
           id: 2
-          name: "JVRC-TSML"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "../../JVRC-TSML/main.wrl"
-            currentBaseLink: "PELVIS"
-            rootPosition: [ 3.24, 2.035, 1.2018 ]
-            rootAttitude: [ 
-              6.12303177e-17, -1, 0, 
-              1, 6.12303177e-17, 0, 
-              0, 0, 1 ]
-            jointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000 ]
-            initialRootPosition: [ 3.24, 2.035, 1.2018 ]
-            initialRootAttitude: [ 
-              2.22044605e-16, -1, 0, 
-              1, 2.22044605e-16, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [ 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000,  0.000000, 
-               0.000000,  0.000000,  0.000000,  0.000000,  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: true
-          children: 
-            - 
-              id: 3
-              name: "BodyRTC"
-              plugin: OpenRTM
-              class: BodyRTCItem
-              data: 
-                isImmediateMode: true
-                moduleName: "/home/player/tsml/lib/creekPdServo"
-                confFileName: "/home/player/tsml/etc/bridgeJVRC.conf"
-                configurationMode: Use Configuration File
-                AutoConnect: false
-                InstanceName: JVRC-TSML
-                bodyPeriodicRate: 0.005
-        - 
-          id: 4
           name: "surface"
           plugin: Body
           class: BodyItem
@@ -85,7 +37,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 5
+          id: 3
           name: "car"
           plugin: Body
           class: BodyItem
@@ -108,7 +60,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 6
+          id: 4
           name: "wall"
           plugin: Body
           class: BodyItem
@@ -131,7 +83,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 7
+          id: 5
           name: "flag1L"
           plugin: Body
           class: BodyItem
@@ -154,7 +106,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 8
+          id: 6
           name: "flag1R"
           plugin: Body
           class: BodyItem
@@ -177,7 +129,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 9
+          id: 7
           name: "flag2L"
           plugin: Body
           class: BodyItem
@@ -200,7 +152,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 10
+          id: 8
           name: "flag2R"
           plugin: Body
           class: BodyItem
@@ -223,7 +175,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 11
+          id: 9
           name: "target1"
           plugin: Body
           class: BodyItem
@@ -246,7 +198,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 12
+          id: 10
           name: "target2"
           plugin: Body
           class: BodyItem
@@ -269,7 +221,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 13
+          id: 11
           name: "target3"
           plugin: Body
           class: BodyItem
@@ -292,7 +244,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 14
+          id: 12
           name: "target4"
           plugin: Body
           class: BodyItem
@@ -315,7 +267,7 @@ items:
             selfCollisionDetection: false
             isEditable: true
         - 
-          id: 15
+          id: 13
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -344,33 +296,12 @@ items:
             2Dmode: false
           children: 
             - 
-              id: 16
+              id: 14
               name: "JVRCManager"
               plugin: JVRC
               class: JVRCManagerItem
               data: 
-                enabled: true
                 info: "R11M.yaml"
-                recordFile: 
-                remainingTimeOutputFilename: jvrc-remaining-time.txt
-            - 
-              id: 17
-              name: "GLVisionSimulator"
-              plugin: Body
-              class: GLVisionSimulatorItem
-              data: 
-                enabled: true
-                maxFrameRate: 1000
-                maxLatency: 1
-                recordVisionData: false
-                useThread: true
-                useThreadsForSensors: true
-                bestEffort: false
-                allSceneObjects: false
-                rangeSensorPrecisionRatio: 2
-                depthError: 0
-                enableHeadLight: true
-                enableAdditionalLights: true
 views: 
   - 
     id: 0
@@ -389,8 +320,9 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
-      expanded: [ 1, 2, 15 ]
+      selected: [ 1 ]
+      checked: [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+      expanded: [ 1, 13 ]
   - 
     id: 3
     plugin: Base
@@ -402,7 +334,7 @@ views:
     class: SceneView
     mounted: true
     state: 
-      editMode: false
+      editMode: true
       viewpointControlMode: thirdPerson
       collisionLines: false
       polygonMode: fill
@@ -413,7 +345,6 @@ views:
       worldLightIntensity: 0.5
       worldLightAmbient: 0.3
       additionalLights: true
-      fog: true
       floorGrid: true
       floorGridSpan: 10
       floorGridInterval: 0.5
@@ -438,9 +369,9 @@ views:
           fieldOfView: 0.6978
           near: 0.01
           far: 100
-          eye: [ 4.0417281, -2.08332691, 3.02367508 ]
-          direction: [ -0.0703297422, 0.942987925, -0.325311389 ]
-          up: [ -0.0241951121, 0.324410383, 0.945606948 ]
+          eye: [ 3.43112891, 12.4633888, 0.603989442 ]
+          direction: [ 0.242125509, -0.964165368, 0.108445287 ]
+          up: [ -0.0264131439, 0.105179495, 0.994102419 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -459,6 +390,7 @@ views:
     state: 
       layoutMode: horizontal
       isAutoMode: false
+      currentTask: Wall
   - 
     id: 6
     plugin: Body
@@ -479,7 +411,6 @@ views:
       spinBox: true
       slider: true
       labelOnLeft: true
-      currentBodyItem: 2
   - 
     id: 8
     plugin: Body
@@ -487,7 +418,6 @@ views:
     mounted: true
     state: 
       listingMode: "Link List"
-      currentBodyItem: 2
   - 
     id: 9
     name: "JVRC Score"
@@ -518,8 +448,6 @@ toolbars:
     snapDistance: 0.025
     penetrationBlockDepth: 0.0005
     lazyCollisionDetectionMode: true
-  "BodyBar": 
-    current: 2
   "LeggedBodyBar": 
     stanceWidth: 0.15
   "BodyMotionGenerationBar": 
@@ -562,6 +490,11 @@ Body:
     editableSceneBodies: 
       - 
         bodyItem: 2
+        showCenterOfMass: false
+        showPpcom: false
+        showZmp: false
+      - 
+        bodyItem: 3
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
@@ -610,16 +543,6 @@ Body:
         showCenterOfMass: false
         showPpcom: false
         showZmp: false
-      - 
-        bodyItem: 13
-        showCenterOfMass: false
-        showPpcom: false
-        showZmp: false
-      - 
-        bodyItem: 14
-        showCenterOfMass: false
-        showPpcom: false
-        showZmp: false
     staticModelEditing: false
   "KinematicFaultChecker": 
     checkJointPositions: true
@@ -632,3 +555,54 @@ Body:
     onlyTimeBarRange: false
 OpenRTM: 
   "deleteUnmanagedRTCsOnStartingSimulation": false
+viewAreas: 
+  - 
+    type: embedded
+    tabs: true
+    contents: 
+      type: splitter
+      orientation: horizontal
+      sizes: [ 274, 1335 ]
+      children: 
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 493, 492 ]
+          children: 
+            - 
+              type: pane
+              views: [ 2 ]
+              current: 2
+            - 
+              type: pane
+              views: [ 1, 8, 9 ]
+              current: 9
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 985, 0 ]
+          children: 
+            - 
+              type: splitter
+              orientation: horizontal
+              sizes: [ 0, 1329 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 6, 7, 0 ]
+                  current: 6
+                - 
+                  type: pane
+                  views: [ 4 ]
+                  current: 4
+            - 
+              type: pane
+              views: [ 3, 10 ]
+              current: 3
+layoutOfToolBars: 
+  rows: 
+    - 
+      - { name: "FileBar", x: 0, priority: 1 }
+      - { name: "TimeBar", x: 22, priority: 0 }
+      - { name: "SceneBar", x: 1494, priority: 2 }
+      - { name: "SimulationBar", x: 1716, priority: 3 }

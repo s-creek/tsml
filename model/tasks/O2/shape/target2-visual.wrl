@@ -248,7 +248,7 @@ Transform {
                       diffuseColor 0.8 0.8 0.8
                     }
                     texture ImageTexture {
-                      url "target2.jpg"
+                      url "target3.jpg"
                     }
                   }
                   geometry IndexedFaceSet {
