@@ -461,6 +461,67 @@ void OpenHRP::_objref_sonyService::setFootPosL(::CORBA::Double x, ::CORBA::Doubl
 
 
 }
+// Proxy call descriptor class. Mangled signature:
+//  void_i_cstring
+class _0RL_cd_457ccd98b3f23528_e0000000
+  : public omniCallDescriptor
+{
+public:
+  inline _0RL_cd_457ccd98b3f23528_e0000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
+     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+  {
+    
+  }
+  
+  void marshalArguments(cdrStream&);
+  void unmarshalArguments(cdrStream&);
+
+    
+  
+  static const char* const _user_exns[];
+
+  ::CORBA::String_var arg_0_;
+  const char* arg_0;
+};
+
+void _0RL_cd_457ccd98b3f23528_e0000000::marshalArguments(cdrStream& _n)
+{
+  _n.marshalString(arg_0,0);
+
+}
+
+void _0RL_cd_457ccd98b3f23528_e0000000::unmarshalArguments(cdrStream& _n)
+{
+  arg_0_ = _n.unmarshalString(0);
+  arg_0 = arg_0_.in();
+
+}
+
+const char* const _0RL_cd_457ccd98b3f23528_e0000000::_user_exns[] = {
+  0
+};
+
+// Local call call-back function.
+static void
+_0RL_lcfn_457ccd98b3f23528_f0000000(omniCallDescriptor* cd, omniServant* svnt)
+{
+  _0RL_cd_457ccd98b3f23528_e0000000* tcd = (_0RL_cd_457ccd98b3f23528_e0000000*)cd;
+  OpenHRP::_impl_sonyService* impl = (OpenHRP::_impl_sonyService*) svnt->_ptrToInterface(OpenHRP::sonyService::_PD_repoId);
+  impl->logStart(tcd->arg_0);
+
+
+}
+
+void OpenHRP::_objref_sonyService::logStart(const char* date)
+{
+  _0RL_cd_457ccd98b3f23528_e0000000 _call_desc(_0RL_lcfn_457ccd98b3f23528_f0000000, "logStart", 9);
+  _call_desc.arg_0 = date;
+
+  _invoke(_call_desc);
+
+
+
+}
 OpenHRP::_pof_sonyService::~_pof_sonyService() {}
 
 
@@ -581,6 +642,14 @@ OpenHRP::_impl_sonyService::_dispatch(omniCallHandle& _handle)
   if( omni::strMatch(op, "setFootPosL") ) {
 
     _0RL_cd_457ccd98b3f23528_20000000 _call_desc(_0RL_lcfn_457ccd98b3f23528_d0000000, "setFootPosL", 12, 1);
+    
+    _handle.upcall(this,_call_desc);
+    return 1;
+  }
+
+  if( omni::strMatch(op, "logStart") ) {
+
+    _0RL_cd_457ccd98b3f23528_e0000000 _call_desc(_0RL_lcfn_457ccd98b3f23528_f0000000, "logStart", 9, 1);
     
     _handle.upcall(this,_call_desc);
     return 1;

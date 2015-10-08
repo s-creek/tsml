@@ -64,7 +64,7 @@ creekPointCloudViewer::creekPointCloudViewer(RTC::Manager* manager)
     m_cloud(new pcl::PointCloud<pcl::PointXYZRGB>),
     m_world(new pcl::PointCloud<pcl::PointXYZRGB>),
     //m_viewer(new pcl::visualization::CloudViewer("Cloud Viewer"))
-    //m_viewer(new pcl::visualization::PCLVisualizer("Cloud Viewer"))
+    //m_viewer(new pcl::visualization::PCLVisualizer("Cloud Viewer")) 
     m_immediately(true),
     m_rfootT(vtkSmartPointer<vtkTransform>::New()),
     m_lfootT(vtkSmartPointer<vtkTransform>::New()),
@@ -947,6 +947,13 @@ void creekPointCloudViewer::clear()
   m_world->clear();
   m_world->width  = 0;
   m_world->height = 0;
+}
+
+
+void creekPointCloudViewer::save(std::string name)
+{
+  std::cout << "creekPointCloudViewer : save name = " << name << std::endl;
+  pcl::io::savePCDFile(name, *m_world);
 }
 
 extern "C"

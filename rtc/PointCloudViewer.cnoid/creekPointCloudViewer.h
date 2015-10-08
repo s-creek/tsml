@@ -56,6 +56,8 @@ public:
   bool autoFittinSwitch();
   void clear();
 
+  void save(std::string name);
+
 
 protected:
   RTC::RangeData m_ranger;

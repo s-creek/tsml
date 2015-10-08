@@ -73,7 +73,7 @@ class ZmpPlaner {
 
   deque<double> cm_z_deque;
   deque<double> absZMP_z_deque;
-
+  deque<bool> contactState_deque;
   //for capture point
   std::deque<vector2> cp_deque;
   vector2 cp;//last cp of one step

@@ -6,6 +6,7 @@
  */
 #include "sony.h"
 //std::ofstream ofs("/home/wu/src/HRP3.1x/sony_cnoid/sony.log");
+//std::ofstream ofs("/home/player/tsml/log/sony.log");
 // Module specification
 // <rtc-template block="module_spec">
 static const char* sony_spec[] =
@@ -25,6 +26,11 @@ static const char* sony_spec[] =
     ""
   };
 // </rtc-template>
+
+template <class T> double toSec(T t)
+{
+  return t.sec + t.nsec / 1000000000.0;
+}
 
 sony::sony(RTC::Manager* manager):
   hrp2Base(manager),
@@ -160,6 +166,10 @@ RTC::ReturnCode_t sony::onInitialize()
   body_cur=MatrixXd::Zero(dof,1);
   body_ref=MatrixXd::Zero(dof,1);
 
+  m_mc.data.length(dof);
+  for(int i=0;i<dof;i++)
+    m_mc.data[i] = 0.0;
+
   return RTC::RTC_OK;
 }
 
@@ -214,7 +224,7 @@ RTC::ReturnCode_t sony::onExecute(RTC::UniqueId ec_id)
     m_axesIn.read();
 
     velobj(0)=m_axes.data[1]*-13;
-    velobj(1)=m_axes.data[0]*-5;
+    velobj(1)=m_axes.data[0]*-2.5;
     velobj(5)=m_axes.data[2]*-3;
   
     //wireless
@@ -284,7 +294,6 @@ RTC::ReturnCode_t sony::onExecute(RTC::UniqueId ec_id)
 		      p_ref, p_Init, R_ref, R_Init, flagcalczmp);
     }
     
-
     calcWholeIVK(); //write in refq
     zmpHandler();
 
@@ -299,22 +308,39 @@ RTC::ReturnCode_t sony::onExecute(RTC::UniqueId ec_id)
     m_baseRpy.data.p=0.0;
     m_baseRpy.data.y=rpy(0);
     //ofs<<m_robot->link(end_link[RLEG])->p()(0)<<endl;
-    
+
     //////////////write///////////////
     rzmp2st();
     m_contactStatesOut.write();
     m_basePosOut.write();
     m_baseRpyOut.write();
     m_lightOut.write();
-    
+
+    // ogawa
+    if( ofs.is_open() ) {
+      cnoid::Vector3 rpyR, rpyL;
+      rpyR = R_ref[RLEG].eulerAngles(2,1,0);
+      rpyL = R_ref[LLEG].eulerAngles(2,1,0);
+      //ofs << absZMP(0) << " " << absZMP(1) << " " << absZMP(2) << " " << cm_ref(0) << " " << cm_ref(1) << " " << com_ref(2) << std::endl;
+
+      ofs << toSec(m_mc.tm);
+      for(int i=0; i<3; i++)  ofs << " " << absZMP(i);
+      for(int i=0; i<3; i++)  ofs << " " << cm_ref(i);
+      for(int i=0; i<3; i++)  ofs << " " << p_ref[RLEG](i);
+      for(int i=0; i<3; i++)  ofs << " " << p_ref[LLEG](i);
+      ofs << " " << rpyR(2) << " " << rpyR(1) << " " << rpyR(0);
+      ofs << " " << rpyL(2) << " " << rpyL(1) << " " << rpyL(0);
+      ofs << std::endl;
+    }
+
     //m_localEEposOut.write();
   }//playflag
 
   //_/_/_/_/_/_/_/_/_test/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/  
   if(!bodyDeque.empty() && !playflag){
     for(int i=0;i<m_robot->numJoints();i++) {
-      //m_mc.data[i]=m_refq.data[i]=bodyDeque.at(0)(i);
-      m_refq.data[i]=bodyDeque.at(0)(i);
+      m_mc.data[i]=m_refq.data[i]=bodyDeque.at(0)(i);
+      //m_refq.data[i]=bodyDeque.at(0)(i);
     }
     bodyDeque.pop_front();
     m_refqOut.write();
@@ -331,13 +357,16 @@ RTC::ReturnCode_t sony::onExecute(RTC::UniqueId ec_id)
 //_/_/_/_/_/_/_/_/_function/_//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_  //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_ 
 inline void sony::rzmp2st()
 {
+  //std::cout << "abs 2 rel zmp" << std::endl;
+  //std::cout << "abs zmp = " << absZMP.format(Eigen::IOFormat(Eigen::StreamPrecision, 0, ", ", ", ", "", "", "[", "]")) << std::endl;
+
   relZMP = R_ref[WAIST].transpose()*(absZMP - m_robot->link(end_link[WAIST])->p());
   //for(int i=0;i< m_rzmp.data.length();i++)
   //  m_rzmp.data[i]=relZMP[i];    
   m_rzmp.data.x=relZMP[0];
   m_rzmp.data.y=relZMP[1];     
   m_rzmp.data.z=relZMP[2];
-  m_rzmpOut.write();
+  m_rzmpOut.write();  
 }
 
 inline void sony::calcWholeIVK()
@@ -581,17 +610,21 @@ void sony::walkingMotion(BodyPtr m_robot, FootType FT, Vector3 &cm_ref, Vector3 
     } 
     ////////////////////////////
 
+    /*
     //contact states ..no good if climb stair
     if(zmpP->Trajzd.at(0)<1e-9)
       m_contactStates.data[swingLeg]=1;
     else 
       m_contactStates.data[swingLeg]=0;
+    */
+
+    m_contactStates.data[swingLeg]=zmpP->contactState_deque.at(0);
 
     zmpP->swLegxy.pop_front();
     zmpP->Trajzd.pop_front();
     zmpP->swLeg_R.pop_front();  
     zmpP->cm_z_deque.pop_front();
- 
+    zmpP->contactState_deque.pop_front();
   }//empty
 
  
@@ -811,6 +844,10 @@ void sony::start()
   //ooo
   playflag=0;
   
+
+  //ogawa
+  absZMP = rzmpInit;
+  basePosUpdate();
 }
 
 void sony::stepping()
@@ -874,6 +911,19 @@ void sony::setFootPosR(double x, double y, double z, double r, double p, double 
   if(omniWalk)
     omniWalkSwitch();
 
+
+  // ogawa
+  if( !playflag ) {
+    m_mcIn.read();
+    for(int i=0;i<dof;i++) {
+      m_refq.data[i]=body_cur(i)=m_mc.data[i];
+    }
+    setModelPosture(m_robot, m_mc, FT, end_link);
+    setCurrentData();
+    std::cout << "setFootPosR : set current data" << std::endl;
+  }
+
+
   RLEG_ref_p[0]=x;
   RLEG_ref_p[1]=y;
   RLEG_ref_p[2]=z;
@@ -899,18 +949,6 @@ void sony::setFootPosR(double x, double y, double z, double r, double p, double 
     stepNum+=1;
   }
 
-
-  // ogawa
-  if( !playflag ) {
-    m_mcIn.read();
-    for(int i=0;i<dof;i++) {
-      m_refq.data[i]=body_cur(i)=m_mc.data[i];
-    }
-    setModelPosture(m_robot, m_mc, FT, end_link);
-    setCurrentData();
-  }
-
-  
   playflag=1;
 }
 
@@ -920,6 +958,20 @@ void sony::setFootPosL(double x, double y, double z, double r, double p, double 
   LLEG_ref_p[1]=y;
   LLEG_ref_p[2]=z;
   LEG_ref_R = cnoid::rotFromRpy(r,p,w);
+
+
+  // ogawa
+  if( !playflag ) {
+    m_mcIn.read();
+    for(int i=0;i<dof;i++) {
+      m_refq.data[i]=body_cur(i)=m_mc.data[i];
+    }
+    setModelPosture(m_robot, m_mc, FT, end_link);
+    setCurrentData();
+    std::cout << "setFootPosR : set current data" << std::endl;
+  }
+
+
   
   if(zmpP->cp_deque.empty()){
     FT=FSLFsw;
@@ -935,18 +987,6 @@ void sony::setFootPosL(double x, double y, double z, double r, double p, double 
   else {
     stepNum+=1;
   }
-
-
-  // ogawa
-  if( !playflag ) {
-    m_mcIn.read();
-    for(int i=0;i<dof;i++) {
-      m_refq.data[i]=body_cur(i)=m_mc.data[i];
-    }
-    setModelPosture(m_robot, m_mc, FT, end_link);
-    setCurrentData();
-  }
-
 
   playflag=1;
 }
@@ -1420,6 +1460,41 @@ void sony::setCurrentData()
   zmpP->setInit( rzmpInit(0) , rzmpInit(1) );//for cp init
   //absZMP(2) = object_ref->p()(2);
   //calcRefLeg();
+
+  absZMP = rzmpInit;
+  basePosUpdate();
+}
+
+
+void sony::basePosUpdate()
+{
+  //base
+  m_basePos.data.x=m_robot->rootLink()->p()(0);
+  m_basePos.data.y=m_robot->rootLink()->p()(1);
+  m_basePos.data.z=m_robot->rootLink()->p()(2);
+  Vector3 rpy=R_ref[WAIST].eulerAngles(2, 1, 0);
+  //m_baseRpy.data.r=rpy(2);
+  //m_baseRpy.data.p=rpy(1);
+  m_baseRpy.data.r=0.0;
+  m_baseRpy.data.p=0.0;
+  m_baseRpy.data.y=rpy(0);
+  //ofs<<m_robot->link(end_link[RLEG])->p()(0)<<endl;
+
+  //////////////write///////////////
+  rzmp2st();
+  m_contactStatesOut.write();
+  m_basePosOut.write();
+  m_baseRpyOut.write();
+}
+
+
+void sony::logStart(std::string date)
+{
+  if( !ofs.is_open() ) {
+    std::string filepath("/home/player/tsml/log/");
+    filepath += (date+"_sony.log");
+    ofs.open(filepath.c_str());
+  }
 }
 
 

@@ -18,5 +18,7 @@ module OpenHRP
     void detectModeOff();
     boolean autoFittinSwitch();
     void clear();
+
+    void save(in string name);
   };
 };

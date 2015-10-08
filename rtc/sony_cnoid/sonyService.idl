@@ -21,5 +21,7 @@ module OpenHRP {
 		void setFootPosL2();
 		void setFootPosR(in double x, in double y, in double z, in double r, in double p, in double w);
 		void setFootPosL(in double x, in double y, in double z, in double r, in double p, in double w);
+
+		void logStart(in string date);  // ogawa
 	};
 };

@@ -29,7 +29,8 @@ include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 
 
-set(CREEK_PATH $ENV{HOME}/workspace/git/creeklib)
+#set(CREEK_PATH $ENV{HOME}/workspace/git/creeklib)
+set(CREEK_PATH /home/player/tsml/rtc/creeklib)
 include_directories(${CREEK_PATH})
 include_directories(${CMAKE_MODULE_PATH})
 

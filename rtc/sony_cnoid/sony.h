@@ -117,7 +117,11 @@ class sony  : public hrp2Base
   void setFootPosR(double x, double y, double z, double r, double p, double w);
   void setFootPosL(double x, double y, double z, double r, double p, double w);
 
+  // ogawa
   void setCurrentData();
+  void basePosUpdate();
+  void logStart(std::string date);
+
 
  protected:
 
@@ -201,6 +205,8 @@ class sony  : public hrp2Base
   bool initialized;
   bool omniWalk;
   bool stopSequence;
+
+  std::ofstream ofs; // ogawa
 };
 
 

@@ -1,8 +1,10 @@
 // -*- mode: idl; indent-tabs-mode: t; tab-width: 4; c-basic-offset: 4; -*-
 
 module OpenHRP {
-  interface creekRobotStateService
-  {
-    void test();
-  };
+	interface creekRobotStateService
+	{
+		void showState();
+		void logStart(in string date);
+		void test();
+	};
 };

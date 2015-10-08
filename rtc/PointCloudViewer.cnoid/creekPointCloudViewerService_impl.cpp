@@ -81,3 +81,9 @@ void creekPointCloudViewerService_impl::detectModeOff()
   if( m_comp != NULL )
     m_comp->detectModeOff();
 }
+
+void creekPointCloudViewerService_impl::save(const char *name)
+{
+  if( m_comp != NULL )
+    m_comp->save(name);
+}

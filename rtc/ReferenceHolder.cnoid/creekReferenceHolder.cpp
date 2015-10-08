@@ -173,6 +173,8 @@ RTC::ReturnCode_t creekReferenceHolder::onExecute(RTC::UniqueId ec_id)
     m_goAct = false;
   }
 
+
+  m_q.tm = m_qCur.tm;
   m_qOut.write();
   m_basePosOut.write();
   m_baseRpyOut.write();

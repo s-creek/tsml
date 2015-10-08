@@ -46,6 +46,8 @@ public:
   void setFootPosR(double x, double y, double z, double r, double p, double w);
   void setFootPosL(double x, double y, double z, double r, double p, double w);
 
+  void logStart(const char *date);  // ogawa
+
   void setComponent (sony * i_comp) {
     m_comp = i_comp;
   }

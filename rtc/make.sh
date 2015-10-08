@@ -2,7 +2,9 @@
 cd `dirname $0`
 cur=`pwd`
 
-list="ArmControlCartesian.cnoid PdServo ReferenceHolder.cnoid SequencePlayer.cnoid ST_cnoid StateEstimator sony_cnoid $@"
+. ./dirs.sh
+
+list="$RTC_DIR_LIST $@"
 
 for dir in $list
 do

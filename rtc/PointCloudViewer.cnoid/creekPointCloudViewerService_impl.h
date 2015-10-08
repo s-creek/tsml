@@ -27,6 +27,8 @@ public:
   bool autoFittinSwitch();
   void clear();
 
+  void save(const char *name);
+
   void setComponent(creekPointCloudViewer *in_comp) { m_comp = in_comp; }
 
 private:

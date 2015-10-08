@@ -184,7 +184,7 @@ void ZmpPlaner::PlanCP( BodyPtr m_robot, FootType FT, Vector3 *p_ref, Matrix3 *R
 
     vector2 cp_EOF;
     double abzZMP_z_EOF;
-
+    //ifLastStep = 0;  //ogawa
     if(!ifLastStep){
       cp_EOF=swLegRef_p_v2;
       abzZMP_z_EOF= swLegRef_p(2);
@@ -621,8 +621,18 @@ void ZmpPlaner::calcSwingLegCP( BodyPtr m_robot, FootType FT, Vector3 *p_ref, Ma
 	}
 	Interplation3(swPivotRef_p(2), 0.0,  swPivotRef_p(2), 0.0, Tp, Trajzd);
 	//cout<<"sw "<<swLegxy.size()<<endl;
+	
+	int TsupNum=  (int)((Tsup)/dt +NEAR0 );
+	int TdblNum=  (int)((Tdbl)/dt +NEAR0 );
+	int TpNum=  (int)((Tp)/dt +NEAR0 );
+	for(int i=0;i<TdblNum;i++)
+	  contactState_deque.push_back(1);
+	for(int i=0;i<TsupNum;i++)
+	  contactState_deque.push_back(0);
+	for(int i=0;i<TpNum;i++)
+	  contactState_deque.push_back(1);
 
-	  //cm_z
+	//cm_z
 	//double cm_z_tgt = lower + cm_z;
 	Interplation3(cm_z_cur, 0.0, cm_z_cur , 0.0, Tdbl+Tv, cm_z_deque);
 	Interplation3(cm_z_cur, 0.0, cm_z_tgt , 0.0, Tsup-2*Tv, cm_z_deque);

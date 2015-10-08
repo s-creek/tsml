@@ -12,6 +12,8 @@ import bodyinfo
 import OpenHRP
 import org.omg.CORBA.DoubleHolder
 
+import datetime
+
 
 def init(nshC, rncC, nshR, rncR):
     print "creating components"
@@ -87,7 +89,7 @@ def createCompsRobot(nshR, rncR):
 
 
 def createCompsConsole(nshC, rncC):
-    global msC, rhC, servoC, rtcListC
+    global msC, rhC, servoC, servoC_svc, rtcListC
     msC = rtm.findRTCmanager(nshC, rncC)
     rhC = rtm.findRTC("JVRC-State", rncC)
     servoC = rtm.findRTC("creekRobotState0", rncC)
@@ -100,6 +102,8 @@ def createCompsConsole(nshC, rncC):
         rtcListC = [rhC]
         if servoC == None:
             return
+
+    servoC_svc = OpenHRP.creekRobotStateServiceHelper.narrow(servoC.service("service0"))
 
     global camera, camera_svc, stick, pcl, pcl_svc
     camera = None
@@ -144,6 +148,15 @@ def connectComps():
     rtm.connectPorts(kf.port("rpy"),    servoC.port("baseRpy"))
     rtm.connectPorts(sh.port("basePosOut"),  servoC.port("basePos"))
 
+    rtm.connectPorts(sh.port("qOut"),        servoC.port("qRef"))
+    rtm.connectPorts(sh.port("baseRpyOut"),  servoC.port("baseRpyRef"))
+    rtm.connectPorts(sh.port("zmpRefOut"),   servoC.port("zmpRef"))
+    rtm.connectPorts(rh.port("rfsensor"),    servoC.port("rfsensor"))
+    rtm.connectPorts(rh.port("lfsensor"),    servoC.port("lfsensor"))
+    rtm.connectPorts(rh.port("rhsensor"),    servoC.port("rhsensor"))
+    rtm.connectPorts(rh.port("lhsensor"),    servoC.port("lhsensor"))
+
+
     if wpg != None:
         rtm.connectPorts(rh.port("rfsensor"),  wpg.port("rfsensor"))
         rtm.connectPorts(rh.port("lfsensor"),  wpg.port("lfsensor"))
@@ -167,7 +180,7 @@ def connectComps():
         rtm.connectPorts(wpg.port("contactStates"), st.port("contactStates"))
         #rtm.connectPorts(wpg.port("localEEpos"), st.port("localEEpos"))
         rtm.connectPorts(st.port("q"),  servo.port("qRef"))
-        rtm.connectPorts(st.port("q"),  wpg.port("mc"))
+        #rtm.connectPorts(st.port("q"),  wpg.port("mc"))
     else:
         rtm.connectPorts(sh.port("qOut"),   servo.port("qRef"))
 
@@ -236,6 +249,9 @@ def movePosRel(x):
 
 def searchOn():
     camera_svc.setSearchFlag("all")
+
+def searchOff():
+    camera_svc.setSearchFlag("none")
 
 def showQrDataList():
     camera_svc.show()
@@ -388,6 +404,32 @@ def gamepadArmL():
     time.sleep(1)
     arm_svc.setArm(1)
 
+
+def setObjectV(x):
+    itemlist = x.split()
+    n = [ float(item) for item in itemlist ]
+    wpg_svc.setObjectV(n[0], n[1], n[2], n[3], n[4], n[5])
+
+def setObjectZero():
+    wpg_svc.setObjectV(0,0,0,0,0,0)
+
+def showRobotState():
+    servoC_svc.showState()
+
+def logRobotState():
+    date=datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    servoC_svc.logStart(date)
+    wpg_svc.logStart(date)
+
+def testStair():
+    wpg_svc.setFootPosR(  0.110, -0.543,  0.188, -0.000, -0.007,  1.549 )
+    wpg_svc.setFootPosL( -0.093, -0.573,  0.187, -0.000, -0.007,  1.554 )
+
+def pclSave(x):
+    path = "/home/player/tsml/log/"+x
+    pcl_svc.save(x)
+
+
 if __name__ == '__main__' or __name__ == 'main':
     if len(sys.argv) > 1:
         robotHost = sys.argv[1]
@@ -396,4 +438,3 @@ if __name__ == '__main__' or __name__ == 'main':
     #init(robotHost)
     #setupLogger()
     #userTest()
-
