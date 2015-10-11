@@ -242,6 +242,15 @@ def goHalfSitting():
     #seq_svc.setZmp([0.023, 0, -bodyinfo.halfsitBasePos[2] ], tm)
     seq_svc.waitInterpolation()
 
+def goBanzai():
+    tm = bodyinfo.timeToHalfsitPose
+    seq_svc.setJointAngles(bodyinfo.makeCommandPose(bodyinfo.banzaiPoseJVRC), tm)
+    #seq_svc.setBasePos(bodyinfo.halfsitBasePos, tm)
+    #seq_svc.setZmp([0.023, 0, -bodyinfo.halfsitBasePos[2] ], tm)
+    seq_svc.waitInterpolation()
+
+
+
 def movePosRel(x):
     itemlist = x.split()
     n = [ float(item) for item in itemlist ]
