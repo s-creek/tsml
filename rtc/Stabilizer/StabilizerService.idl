@@ -1,0 +1,134 @@
+/**
+ * @file StabilizerService.idl
+ * @brief Services for the stabilizer interface
+ */
+module OpenHRP
+{
+  interface StabilizerService
+  {
+    typedef double DblArray2[2];
+
+    /**
+     * @enum STAlgorithm
+     * @brief Algorithm of Stabilizer
+     */
+    enum STAlgorithm {
+      TPCC,
+      EEFM
+    };
+
+    /**
+     * @enum ControllerMode
+     * @brief Mode of controller
+     */
+    enum ControllerMode {
+      MODE_IDLE,
+      MODE_AIR,
+      MODE_ST,
+      MODE_SYNC_TO_IDLE,
+      MODE_SYNC_TO_AIR
+    };
+
+    /**
+     * @struct stParam
+     * @brief Stabilizer Parameters.
+     */
+    struct stParam {
+      // for TPCC
+      /// Feedback gain for ZMP tracking error (x,y)
+      DblArray2 k_tpcc_p;
+      /// Feedback gain for COG position tracking error (x,y)
+      DblArray2 k_tpcc_x;
+      /// Body posture control gain [rad/s] (roll, pitch).
+      DblArray2 k_brot_p;
+      /// Time constant for body posture control [s] (roll, pitch).
+      DblArray2 k_brot_tc;
+      // for RUNST
+      DblArray2 k_run_b;
+      DblArray2 d_run_b;
+      DblArray2 tdfke;
+      DblArray2 tdftc;
+      double k_run_x;
+      double k_run_y;
+      double d_run_x;
+      double d_run_y;
+      // for EEFM ST
+      boolean eefm_pos_control_switch;
+      boolean eefm_rot_control_switch;
+      boolean eefm_att_control_switch;
+
+      /// Feedback gain for COG position tracking error (x,y)
+      DblArray2 eefm_k1;
+      /// Feedback gain for COG velocity tracking error (x,y)
+      DblArray2 eefm_k2;
+      /// Feedback gain for ZMP tracking error (x,y)
+      DblArray2 eefm_k3;
+      /// Time constant for stabilizer ZMP delay [s] (x,y)
+      DblArray2 eefm_zmp_delay_time_const;
+      /// Auxiliary input for ZMP position [m] (x,y). This is used for delay model identification
+      DblArray2 eefm_ref_zmp_aux;
+      /// Foot rotation damping gain [Nm/(rad/s)].
+      //double eefm_rot_damping_gain;
+      //wutest
+      DblArray2 eefm_rot_damping_gain;
+
+      /// Foot rotation damping time constant [s].
+      double eefm_rot_time_const;
+      /// Foot position damping gain [N/(m/s)].
+      double eefm_pos_damping_gain;
+      /// Foot position damping time constant for double support phase [s].
+      double eefm_pos_time_const_support;
+      /// Foot position damping time constant for single support phase [s].
+      double eefm_pos_time_const_swing;
+      /// Transition time for single=>double support phase gain interpolation [s].
+      double eefm_pos_transition_time;
+      /// Margin for transition time for single=>double support phase gain interpolation [s].
+      double eefm_pos_margin_time;
+      /// Inside foot margine [m]. Distance between foot end effector position and foot inside edge.
+      double eefm_leg_inside_margin;
+      /// Front foot margine [m]. Distance between foot end effector position and foot front edge.
+      double eefm_leg_front_margin;
+      /// Rear foot margine [m]. Distance between foot end effector position and foot rear edge.
+      double eefm_leg_rear_margin;
+      /// Body attitude control gain [rad/s] (roll, pitch) for EEFM.
+      DblArray2 eefm_body_attitude_control_gain;
+      /// Time constant for body attitude control [s] (roll, pitch) for EEFM.
+      DblArray2 eefm_body_attitude_control_time_const;
+      /// Cutoff frequency of LPF in calculation of COG velocity [Hz]
+      double eefm_cogvel_cutoff_freq;
+      // common
+      STAlgorithm st_algorithm;
+      ControllerMode controller_mode;
+    };
+
+    /**
+     * @brief Get Stabilizer parameters.
+     * @param i_param is output parameters
+     * @return true if set successfully, false otherwise
+     */
+    void getParameter(out stParam i_param);
+
+    /**
+     * @brief Set Stabilizer parameters.
+     * @param i_param is input parameters
+     * @return true if set successfully, false otherwise
+     */
+    void setParameter(in stParam i_param);
+
+    /**
+     * @brief Start Stabilizer mode.
+     * @param
+     * @return
+     */
+    void startStabilizer();
+
+    /**
+     * @brief Sop Stabilizer mode.
+     * @param
+     * @return
+     */
+    void stopStabilizer();
+    boolean dummy();
+  };
+};
+
