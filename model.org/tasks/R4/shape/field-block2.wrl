@@ -1,0 +1,78 @@
+#VRML V2.0 utf8
+#modeled using blender3d http://blender.org
+
+# 'ShapeIndexedFaceSet.007'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.181210 12.000000 0.362002 3.681220 12.000000 0.862002 3.681220 12.000000 0.362002 4.181210 12.000000 0.862002 4.181210 14.000000 0.862002 4.181210 14.000000 0.362002 3.681220 14.000000 0.362002 3.681220 14.000000 0.862002 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.32 0.32 0.32 ]
+		}
+		colorIndex [ 0 0 0 0 0 0 0 0 0 0 0 0 ]
+		coordIndex [ 1 3 7 -1 1 7 6 -1 5 6 7 -1 5 7 8 -1 1 4 2 -1 1 2 3 -1 2 8 7 -1 2 7 3 -1 2 4 5 -1 2 5 8 -1 1 6 5 -1 1 5 4 -1 ]
+	}
+}
+
+# 'ShapeIndexedFaceSet.006'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.181210 12.460000 0.362002 4.481220 12.560000 0.362002 4.481220 12.460000 0.362002 4.181210 12.560000 0.362002 4.181210 12.560000 0.862002 4.181210 12.460000 0.862002 4.481220 12.460000 0.862002 4.481220 12.560000 0.862002 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.32 0.32 0.32 ]
+		}
+		colorIndex [ 0 0 0 0 0 0 0 0 0 0 0 0 ]
+		coordIndex [ 5 6 7 -1 5 7 8 -1 1 6 5 -1 1 5 4 -1 1 4 2 -1 1 2 3 -1 2 8 7 -1 2 7 3 -1 2 4 5 -1 2 5 8 -1 3 7 6 -1 3 6 1 -1 ]
+	}
+}
+
+# 'ShapeIndexedFaceSet.005'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.181210 12.860000 0.362002 4.481220 12.960000 0.362002 4.481220 12.860000 0.362002 4.181210 12.960000 0.362002 4.181210 12.960000 0.862002 4.181210 12.860000 0.862002 4.481220 12.860000 0.862002 4.481220 12.960000 0.862002 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.32 0.32 0.32 ]
+		}
+		colorIndex [ 0 0 0 0 0 0 0 0 0 0 0 0 ]
+		coordIndex [ 5 6 7 -1 5 7 8 -1 1 6 5 -1 1 5 4 -1 1 4 2 -1 1 2 3 -1 2 8 7 -1 2 7 3 -1 2 4 5 -1 2 5 8 -1 3 7 6 -1 3 6 1 -1 ]
+	}
+}
+
+# 'ShapeIndexedFaceSet.004'
+Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry IndexedFaceSet {
+		coord Coordinate {
+			point [ 0.000000 0.000000 0.000000 4.531220 12.460000 0.862002 4.481220 12.960000 0.862002 4.481220 12.460000 0.862002 4.531220 12.960000 0.862002 4.531220 12.460000 0.762002 4.531220 12.960000 0.762002 4.481220 12.460000 0.762002 4.481220 12.960000 0.762002 ]
+		}
+		colorPerVertex FALSE
+		color Color {
+			color [ 0.32 0.32 0.32 ]
+		}
+		colorIndex [ 0 0 0 0 0 0 0 0 0 0 0 0 ]
+		coordIndex [ 7 8 6 -1 7 6 5 -1 1 4 2 -1 1 2 3 -1 4 6 8 -1 4 8 2 -1 5 6 4 -1 5 4 1 -1 3 2 8 -1 3 8 7 -1 1 3 7 -1 1 7 5 -1 ]
+	}
+}
