@@ -19,7 +19,8 @@ TASK_DIR=/home/player/tsml/model.org/tasks
 #/usr/bin/choreonoid ${TASK_DIR}/R11M/R11M.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R12/R12.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R2AB/R2AB.cnoid
-/usr/bin/choreonoid ${TASK_DIR}/R2C/R2C.cnoid
+#/usr/bin/choreonoid ${TASK_DIR}/R2C/R2C.cnoid
+
 #/usr/bin/choreonoid ${TASK_DIR}/R3A/R3A.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R3B/R3B.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R4/R4.cnoid
@@ -28,4 +29,5 @@ TASK_DIR=/home/player/tsml/model.org/tasks
 #/usr/bin/choreonoid ../etc/RobotState.cnoid
 #/usr/bin/choreonoid ../etc/QrCodeTest.cnoid
 #/usr/bin/choreonoid ../etc/WalkTest.cnoid
+/usr/bin/choreonoid ../etc/WalkTestBush.cnoid
 #/usr/bin/choreonoid ${TASK_DIR}/R2AB/R2AB_test.cnoid
