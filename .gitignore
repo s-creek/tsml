@@ -22,7 +22,7 @@ CMakeFiles
 
 bin/
 python/
-src/
+#src/
 
 # VS
 *.obj
