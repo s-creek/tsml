@@ -223,7 +223,7 @@ RTC::ReturnCode_t sony::onExecute(RTC::UniqueId ec_id)
   if(m_axesIn.isNew()){
     m_axesIn.read();
 
-    velobj(0)=m_axes.data[1]*-13;
+    velobj(0)=m_axes.data[1]*-20;
     velobj(1)=m_axes.data[0]*-2.5;
     velobj(5)=m_axes.data[2]*-3;
   

@@ -190,7 +190,7 @@ class hrp2Base  : public RTC::DataFlowComponentBase
   //ForceSensor * fsensorRLEG;
   //ForceSensor * fsensorLLEG;
   DeviceList<ForceSensor> forceSensors;
-  DeviceList<AccelSensor> AccelSensors;
+  DeviceList<AccelerationSensor> AccelSensors;
   DeviceList<RateGyroSensor> RateGyroSensors;
   void updates();
 
