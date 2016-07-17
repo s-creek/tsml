@@ -182,7 +182,7 @@ class sony  : public hrp2Base
   //vector32 body_cur;
   //vector32 body_ref;
 
-  MatrixXd body_cur;
+  MatrixXd body_cur;//useless
   MatrixXd body_ref;
   std::deque<MatrixXd> bodyDeque;
 

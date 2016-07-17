@@ -29,5 +29,5 @@ TASK_DIR=/home/player/tsml/model.org/tasks
 #/usr/bin/choreonoid ../etc/RobotState.cnoid
 #/usr/bin/choreonoid ../etc/QrCodeTest.cnoid
 #/usr/bin/choreonoid ../etc/WalkTest.cnoid
-/usr/bin/choreonoid ../etc/WalkTestBush.cnoid
+/usr/bin/choreonoid ../etc/WalkTestBush.cnoid --start-simulation
 #/usr/bin/choreonoid ${TASK_DIR}/R2AB/R2AB_test.cnoid

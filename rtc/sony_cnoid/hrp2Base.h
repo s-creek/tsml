@@ -173,8 +173,8 @@ class hrp2Base  : public RTC::DataFlowComponentBase
   Vector3 cm_ref;
   std::deque<vector2> rfzmp;
   
-  std::vector<double> kgain;
-  std::vector<double> fgain;
+  //std::vector<double> kgain;
+  //std::vector<double> fgain;
   FootType FT;
   
   string end_link[LINKNUM];
