@@ -400,9 +400,7 @@ DEF JVRC-TSML Humanoid {
                                     } # surface
                                   ]
 				}#R_ANKLE_P_S Segment
-				# DEF rfsensor ForceSensor {
-				#   sensorId 0
-				# }
+		
 				 DEF RLEG_BUSH_Z Joint {
                                   jointType "slide"
                                   jointAxis "Z"
@@ -411,12 +409,13 @@ DEF JVRC-TSML Humanoid {
                                   ulimit [ 1.0]
                                   rotorInertia 0.1
                                   children [
-                                    DEF rfsensor ForceSensor {
-                                      # translation 0 0 -0.069
-                                      translation 0 0 0.008
-                                      #rotation 0 1 0 3.14159
-                                      sensorId 0
-                                    } #Sensor
+                                    # DEF rfsensor ForceSensor {
+                                    #    #translation 0 0 -0.069
+                                    #   translation 0 0 0.008
+
+                                    #   #rotation 0 1 0 3.14159
+                                    #   sensorId 0
+                                    # } #Sensor
                                     DEF RLEG_BUSH_ROLL Joint {
                                       jointType "rotate"
                                       jointAxis "X"
@@ -449,7 +448,9 @@ DEF JVRC-TSML Humanoid {
                                   ]
                                 } # End of RLEG_BUSH_Z
 				
-
+				 DEF rfsensor ForceSensor {
+				   sensorId 0
+				 }	
 			      ]
 			    } # R_ANKLE_P
 			  ]
@@ -579,9 +580,7 @@ DEF JVRC-TSML Humanoid {
                                     } # surface
                                   ]
 				} #L_ANKLE_P_S Segment
-				# DEF lfsensor ForceSensor {
-				#   sensorId 1
-				# }
+				
 				 DEF LLEG_BUSH_Z Joint {
                                   jointType "slide"
                                   jointAxis "Z"
@@ -590,12 +589,12 @@ DEF JVRC-TSML Humanoid {
                                   ulimit [ 1.0]
                                   rotorInertia 0.1
                                   children [
-                                    DEF lfsensor ForceSensor {
-                                      # translation 0 0 -0.069
-                                      translation 0 0 0.008
-                                      #rotation 0 1 0 3.14159
-                                      sensorId 1
-                                    }
+                                    # DEF lfsensor ForceSensor {
+                                    #   #translation 0 0 -0.069
+                                    #   translation 0 0 0.008
+                                    #   #rotation 0 1 0 3.14159
+                                    #   sensorId 1
+                                    # }
                                     DEF LLEG_BUSH_ROLL Joint {
                                       jointType "rotate"
                                       jointAxis "X"
@@ -627,6 +626,12 @@ DEF JVRC-TSML Humanoid {
                                     } # End of LLEG_BUSH_ROLL
                                   ]
                                 } # End of LLEG_BUSH_Z
+
+
+				 DEF lfsensor ForceSensor {
+				   sensorId 1
+				 }	
+
 			      ]
 			    } # L_ANKLE_P
 			  ]

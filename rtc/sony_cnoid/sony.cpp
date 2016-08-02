@@ -556,12 +556,12 @@ void sony::start2walk(BodyPtr m_robot, ZmpPlaner *zmpP, bool &stopflag)
     //cout<<FT<<" CPstop"<<endl;
     //cout<<"swLegRef_p "<<swLegRef_p<<endl;
     bool ifLastStep = 1;
-    zmpP->PlanCP(m_robot, FT, p_ref, R_ref, swLegRef_p, LEG_ref_R, 
+    zmpP->PlanCP(m_robot, FT, swLegRef_p, LEG_ref_R, 
       rfzmp, usePivot, end_link, ifLastStep); 
  }
   else {
     //cout<<"CP"<<endl;
-    zmpP->PlanCP(m_robot, FT, p_ref, R_ref, swLegRef_p, LEG_ref_R, rfzmp, usePivot, end_link);
+    zmpP->PlanCP(m_robot, FT, swLegRef_p, LEG_ref_R, rfzmp, usePivot, end_link);
   }
 
 }

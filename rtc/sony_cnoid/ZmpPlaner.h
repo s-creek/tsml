@@ -33,11 +33,11 @@ class ZmpPlaner {
   //void StopZMP(FootType FT, std::deque<vector2> &rfzmp, int count);
 
   //capture point/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-  void PlanCP( BodyPtr m_robot, FootType FT, Vector3 *p_ref, Matrix3 *R_ref, Vector3 swLegRef_p, Matrix3 input_ref_R, std::deque<vector2> &rfzmp, bool usePivot, string *end_link, bool ifLastStep = 0);
+  void PlanCP( BodyPtr m_robot, FootType FT, Vector3 swLegRef_p, Matrix3 input_ref_R, std::deque<vector2> &rfzmp, bool usePivot, string *end_link, bool ifLastStep = 0);
 
   void PlanCPstop(BodyPtr m_robot ,FootType FT, Vector3 *p_ref, Matrix3 *R_ref, Vector3 swLegRef_p, Matrix3 input_ref_R, std::deque<vector2> &rfzmp, string *end_link); 
  
-  void calcSwingLegCP( BodyPtr m_robot, FootType FT, Vector3 *p_ref, Matrix3 *R_ref, Vector3 swLegRef_p, Matrix3 object_ref_R, bool usePivot, string *end_link);
+  void calcSwingLegCP( BodyPtr m_robot, FootType FT, Vector3 swLegRef_p, Matrix3 tar_R, bool usePivot, string *end_link);
   
   void setw(double &cm_z_in, double groundHeight=0.0);  // ogawa
   void setZmpOffsetX(double &cm_offset_x);

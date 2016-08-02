@@ -192,8 +192,15 @@ RTC::ReturnCode_t hrp2Base::onInitialize()
   //Matrix3 testR= forceSensors[0]->link()->R()* forceSensors[0]->R_local();
   ForceSensor* sensor=forceSensors[0];
   Matrix3 testR=sensor->link()->R()* sensor->R_local();
-  cout<<"test R"<<'\n'<<testR<<endl;
+  Vector3 sep = sensor->link()->p() + testR * sensor->p_local();
+  cout<<"test R"<<'\n'<< sensor->R_local() << '\n' << sensor->p_local() <<endl;
   cout<<sensor->link()->name()<<endl;
+
+  ForceSensor* sensor1=forceSensors[1];
+  testR=sensor1->link()->R()* sensor1->R_local();
+  sep = sensor1->link()->p() + testR * sensor1->p_local();
+  cout<<"test R2"<<'\n'<< sensor1->R_local()<< '\n' << sensor1->p_local() <<endl;
+  cout<<sensor1->link()->name()<<endl;
 
 
     //data port
