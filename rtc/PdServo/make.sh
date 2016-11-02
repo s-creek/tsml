@@ -11,12 +11,13 @@ export COMP_NAME="creekPdServo"
 # not change !!
 #
 export RTM_ROOT=/usr
-export PATH=/usr/bin:$PATH
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
+#export PATH=/usr/bin:$PATH
+#export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
+#export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
 #CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/usr/lib/choreonoid-1.5  $@  -DCOMP_NAME=${COMP_NAME}"
-CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/home/player/tsml -DCOMP_NAME=${COMP_NAME}"
+#CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/home/player/tsml -DCOMP_NAME=${COMP_NAME}"
+CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/opt/tsml -DCOMP_NAME=${COMP_NAME}"
 MAKE_OPT="VERBOSE=1 $@"
 
 # for logging

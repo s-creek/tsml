@@ -1,4 +1,7 @@
-#!/home/player/tsml/bin/hrpsysjy
+#!/opt/tsml/bin/hrpsysjy
+import sys
+sys.path.append('/home/player/tsml/share/jython')
+
 import os
 import time
 from java.lang import System

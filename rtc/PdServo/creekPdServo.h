@@ -27,8 +27,8 @@ protected:
   RTC::TimedDoubleSeq m_qRef;
   RTC::InPort<RTC::TimedDoubleSeq> m_qRefIn;
 
-  RTC::TimedDoubleSeq m_qCur;
-  RTC::InPort<RTC::TimedDoubleSeq> m_qCurIn;
+  RTC::TimedDoubleSeq m_qAct;
+  RTC::InPort<RTC::TimedDoubleSeq> m_qActIn;
 
   RTC::TimedDoubleSeq m_tauRef;
   RTC::OutPort<RTC::TimedDoubleSeq> m_tauRefOut;
@@ -43,12 +43,8 @@ private:
   std::vector<double> m_dGain;
 
   bool m_isInit;
-  std::vector<double> m_qPre;
+  std::vector<double> m_qActPre;
   std::vector<double> m_qRefPre;
-
-  unsigned int m_calcGainMode;
-  std::vector<double> m_maxErr;
-  std::vector<int> m_count;
 };
 
 extern "C"

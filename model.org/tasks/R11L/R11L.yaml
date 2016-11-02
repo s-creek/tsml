@@ -1,9 +1,0 @@
-tasks:
-  - name: R11_L
-    events:
-      - type: gate
-        label: Gate-1
-        location: [ [ 4.69, 2.895, 0.35 ], [ 1.79, 2.895, 0.35 ] ]
-      - type: gate
-        label: Gate-2
-        location: [ [ 4.69, 21.11, 0.35 ], [ 1.79, 21.11, 0.35 ] ]

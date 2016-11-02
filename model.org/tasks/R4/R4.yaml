@@ -1,9 +1,0 @@
-tasks:
-  - name: R4
-    events:
-      - type: gate
-        label: Gate-1
-        location: [ [ 6.13, 3.183, 0.35 ], [ 3.23, 3.183, 0.35 ] ]
-      - type: gate
-        label: Gate-2
-        location: [ [ 6.13, 17.96, 0.35 ], [ 3.23, 17.96, 0.35 ] ]

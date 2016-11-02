@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 if (NOT CMAKE_MODULE_PATH)
-  set(CMAKE_MODULE_PATH /home/player/tsml/share/hrpsys/cmake_modules/ CACHE STRING "set path to cmake_modules")
+  set(CMAKE_MODULE_PATH /home/player/tsml/share/hrpsys/cmake_modules CACHE STRING "set path to cmake_modules")
 endif (NOT CMAKE_MODULE_PATH)
 
 ####
@@ -29,7 +29,7 @@ set(comp_sources ${comp_name}.cpp)
 
 add_library(${comp_name} SHARED ${comp_sources})
 target_link_libraries(${comp_name} ${OPENRTM_LIBRARIES})
-target_link_libraries(${comp_name} lapack blas f2c m)
+#target_link_libraries(${comp_name} lapack blas f2c m)
 set_target_properties(${comp_name} PROPERTIES PREFIX "")
 
 if (NO_COMP)
@@ -45,6 +45,5 @@ endif()
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3 -fno-schedule-insns -fno-schedule-insns2 -fno-strict-aliasing")
 
 #install(TARGETS ${target}
-#install(TARGETS ${comp_name} LIBRARY DESTINATION rtc CONFIGURATIONS)
-install(TARGETS ${comp_name} LIBRARY DESTINATION lib CONFIGURATIONS)
-#install(FILES connect.conf DESTINATION etc)
+install(TARGETS ${comp_name} LIBRARY DESTINATION lib/rtc CONFIGURATIONS)
+#install(FILES connect.conf DESTINATION rtc)
