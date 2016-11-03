@@ -1,0 +1,12 @@
+TSML_BIN_DIR=`dirname "${BASH_SOURCE[0]}"`
+export TSML_DIR=`dirname "${TSML_BIN_DIR}"`
+
+# creeklib : test
+export LD_LIBRARY_PATH=${HOME}/workspace/git/creeklib/interpolator:${HOME}/workspace/git/creeklib/walk:$LD_LIBRARY_PATH
+export CPATH=${HOME}/workspace/git:$CPATH
+
+
+#export PATH=${TSML_BIN_DIR}:$PATH
+#export PKG_CONFIG_PATH=${TSML_DIR}/lib/pkgconfig:$PKG_CONFIG_PATH
+#export LD_LIBRARY_PATH=${TSML_DIR}/lib:$LD_LIBRARY_PATH
+#export CPATH=${TSML_DIR}/include:$CPATH

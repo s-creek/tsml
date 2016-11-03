@@ -4,7 +4,7 @@ cd `dirname $0`
 #
 # user configuration
 #
-export COMP_NAME="creekGaitGenerator"
+export COMP_NAME="creekSequencePlayer"
 
 
 #

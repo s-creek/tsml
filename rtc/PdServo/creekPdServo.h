@@ -42,7 +42,6 @@ private:
   std::vector<double> m_pGain;
   std::vector<double> m_dGain;
 
-  bool m_isInit;
   std::vector<double> m_qActPre;
   std::vector<double> m_qRefPre;
 };

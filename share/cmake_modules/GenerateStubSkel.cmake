@@ -10,7 +10,7 @@ if(NOT QNXNTO)
   set(JAR jar)
   set(IDLJ idlj)
   set(idlj_flags -fclient -fserver -emitAll -td src -d ORBIT2_IDL -d TYPECODE_CORBA_PREFIX)
-  set(javac_flags -target 1.5 -d . -sourcepath src)
+  set(javac_flags -target 1.7 -d . -sourcepath src)
 endif()
 
 ####

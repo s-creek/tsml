@@ -58,8 +58,8 @@ include_directories(${CMAKE_MODULE_PATH})
 set(comp_name ${COMP_NAME})
 set(comp_sources ${comp_name}.cpp)
 
-generate_stub_skel(${comp_name}Service)
-set(comp_sources ${comp_sources} ${comp_name}Service_impl.cpp ${comp_name}ServiceSk.cpp)
+# generate_stub_skel(${comp_name}Service)
+# set(comp_sources ${comp_sources} ${comp_name}Service_impl.cpp ${comp_name}ServiceSk.cpp)
 
 
 add_library(${comp_name} SHARED ${comp_sources})

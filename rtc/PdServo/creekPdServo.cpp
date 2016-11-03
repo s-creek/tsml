@@ -131,7 +131,7 @@ RTC::ReturnCode_t creekPdServo::onExecute(RTC::UniqueId ec_id)
 
     m_tauRef.data[i] = m_pGain[i] * (qRef - qAct) + m_dGain[i] * (vRef - vAct);
 
-    m_qActPre[i]    = m_qAct.data[i];
+    m_qActPre[i] = m_qAct.data[i];
     m_qRefPre[i] = m_qRef.data[i];
   }
 

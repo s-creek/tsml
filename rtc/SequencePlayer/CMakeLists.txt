@@ -43,8 +43,6 @@ else()
 
   add_definitions(-DUSE_CNOID_MODEL)
   string(REPLACE "." "" CNOID_VERSION ${CHOREONOID_VERSION})
-  message("cnoid ver = " ${CHOREONOID_VERSION})
-  message("cnoid ver = " ${CNOID_VERSION})
   add_definitions(-DCNOID_VERSION=${CNOID_VERSION})
 endif()
 
