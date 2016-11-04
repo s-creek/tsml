@@ -92,7 +92,7 @@ RTC::ReturnCode_t creekReferenceHolder::onInitialize()
 	    << "    base rpy = " << m_baseRpy.data.r << ", " << m_baseRpy.data.p << ", " << m_baseRpy.data.y << "\n"
 	    << "    zmp pos  = " << m_zmpRef.data.x  << ", " << m_zmpRef.data.y  << ", " << m_zmpRef.data.z  << "\n";
 
-
+  
   return RTC::RTC_OK;
 }
 
@@ -103,7 +103,7 @@ RTC::ReturnCode_t creekReferenceHolder::onActivated(RTC::UniqueId ec_id)
 
   if( m_qCurIn.isNew() ) {
     m_qCurIn.read();
-    unsigned int dof = qCur.data.length();
+    unsigned int dof = m_qCur.data.length();
     m_q.data.length(dof);
     memcpy(m_q.data.get_buffer(), m_qCur.data.get_buffer(), sizeof(double)*dof );
   }

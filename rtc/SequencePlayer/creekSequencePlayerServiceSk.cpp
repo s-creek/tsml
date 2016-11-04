@@ -124,7 +124,7 @@ class _0RL_cd_80d7548870faf0f8_00000000
 {
 public:
   inline _0RL_cd_80d7548870faf0f8_00000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
-     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+     omniCallDescriptor(lcfn, op_, oplen, 0, 0, 0, upcall)
   {
     
   }
@@ -132,13 +132,7 @@ public:
   
     
   
-  static const char* const _user_exns[];
-
   
-};
-
-const char* const _0RL_cd_80d7548870faf0f8_00000000::_user_exns[] = {
-  0
 };
 
 // Local call call-back function.
@@ -169,7 +163,7 @@ class _0RL_cd_80d7548870faf0f8_20000000
 {
 public:
   inline _0RL_cd_80d7548870faf0f8_20000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
-     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+     omniCallDescriptor(lcfn, op_, oplen, 0, 0, 0, upcall)
   {
     
   }
@@ -181,8 +175,6 @@ public:
   void marshalReturnedValues(cdrStream&);
   
   
-  static const char* const _user_exns[];
-
   OpenHRP::dSequence_var arg_0_;
   const OpenHRP::dSequence* arg_0;
   ::CORBA::Double arg_1;
@@ -217,10 +209,6 @@ void _0RL_cd_80d7548870faf0f8_20000000::unmarshalReturnedValues(cdrStream& _n)
 
 }
 
-const char* const _0RL_cd_80d7548870faf0f8_20000000::_user_exns[] = {
-  0
-};
-
 // Local call call-back function.
 static void
 _0RL_lcfn_80d7548870faf0f8_30000000(omniCallDescriptor* cd, omniServant* svnt)
@@ -232,10 +220,10 @@ _0RL_lcfn_80d7548870faf0f8_30000000(omniCallDescriptor* cd, omniServant* svnt)
 
 }
 
-::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setJointAngles(const ::OpenHRP::dSequence& jvs, ::CORBA::Double tm)
+::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setJointAngles(const dSequence& jvs, ::CORBA::Double tm)
 {
   _0RL_cd_80d7548870faf0f8_20000000 _call_desc(_0RL_lcfn_80d7548870faf0f8_30000000, "setJointAngles", 15);
-  _call_desc.arg_0 = &(::OpenHRP::dSequence&) jvs;
+  _call_desc.arg_0 = &(dSequence&) jvs;
   _call_desc.arg_1 = tm;
 
   _invoke(_call_desc);
@@ -250,7 +238,7 @@ class _0RL_cd_80d7548870faf0f8_40000000
 {
 public:
   inline _0RL_cd_80d7548870faf0f8_40000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
-     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+     omniCallDescriptor(lcfn, op_, oplen, 0, 0, 0, upcall)
   {
     
   }
@@ -262,8 +250,6 @@ public:
   void marshalReturnedValues(cdrStream&);
   
   
-  static const char* const _user_exns[];
-
   ::CORBA::String_var arg_0_;
   const char* arg_0;
   ::CORBA::Double arg_1;
@@ -300,10 +286,6 @@ void _0RL_cd_80d7548870faf0f8_40000000::unmarshalReturnedValues(cdrStream& _n)
 
 }
 
-const char* const _0RL_cd_80d7548870faf0f8_40000000::_user_exns[] = {
-  0
-};
-
 // Local call call-back function.
 static void
 _0RL_lcfn_80d7548870faf0f8_50000000(omniCallDescriptor* cd, omniServant* svnt)
@@ -338,10 +320,10 @@ _0RL_lcfn_80d7548870faf0f8_60000000(omniCallDescriptor* cd, omniServant* svnt)
 
 }
 
-::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBasePos(const ::OpenHRP::dSequence& pos, ::CORBA::Double tm)
+::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBasePos(const dSequence& pos, ::CORBA::Double tm)
 {
   _0RL_cd_80d7548870faf0f8_20000000 _call_desc(_0RL_lcfn_80d7548870faf0f8_60000000, "setBasePos", 11);
-  _call_desc.arg_0 = &(::OpenHRP::dSequence&) pos;
+  _call_desc.arg_0 = &(dSequence&) pos;
   _call_desc.arg_1 = tm;
 
   _invoke(_call_desc);
@@ -360,10 +342,10 @@ _0RL_lcfn_80d7548870faf0f8_70000000(omniCallDescriptor* cd, omniServant* svnt)
 
 }
 
-::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBaseRpy(const ::OpenHRP::dSequence& rpy, ::CORBA::Double tm)
+::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBaseRpy(const dSequence& rpy, ::CORBA::Double tm)
 {
   _0RL_cd_80d7548870faf0f8_20000000 _call_desc(_0RL_lcfn_80d7548870faf0f8_70000000, "setBaseRpy", 11);
-  _call_desc.arg_0 = &(::OpenHRP::dSequence&) rpy;
+  _call_desc.arg_0 = &(dSequence&) rpy;
   _call_desc.arg_1 = tm;
 
   _invoke(_call_desc);
@@ -382,10 +364,10 @@ _0RL_lcfn_80d7548870faf0f8_80000000(omniCallDescriptor* cd, omniServant* svnt)
 
 }
 
-::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setZmp(const ::OpenHRP::dSequence& zmp, ::CORBA::Double tm)
+::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setZmp(const dSequence& zmp, ::CORBA::Double tm)
 {
   _0RL_cd_80d7548870faf0f8_20000000 _call_desc(_0RL_lcfn_80d7548870faf0f8_80000000, "setZmp", 7);
-  _call_desc.arg_0 = &(::OpenHRP::dSequence&) zmp;
+  _call_desc.arg_0 = &(dSequence&) zmp;
   _call_desc.arg_1 = tm;
 
   _invoke(_call_desc);
@@ -400,7 +382,7 @@ class _0RL_cd_80d7548870faf0f8_90000000
 {
 public:
   inline _0RL_cd_80d7548870faf0f8_90000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
-     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+     omniCallDescriptor(lcfn, op_, oplen, 0, 0, 0, upcall)
   {
     
   }
@@ -410,8 +392,6 @@ public:
   void marshalReturnedValues(cdrStream&);
   
   
-  static const char* const _user_exns[];
-
   ::CORBA::Boolean result;
 };
 
@@ -426,10 +406,6 @@ void _0RL_cd_80d7548870faf0f8_90000000::unmarshalReturnedValues(cdrStream& _n)
   result = _n.unmarshalBoolean();
 
 }
-
-const char* const _0RL_cd_80d7548870faf0f8_90000000::_user_exns[] = {
-  0
-};
 
 // Local call call-back function.
 static void
@@ -463,10 +439,10 @@ _0RL_lcfn_80d7548870faf0f8_b0000000(omniCallDescriptor* cd, omniServant* svnt)
 
 }
 
-::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBasePosRel(const ::OpenHRP::dSequence& pos, ::CORBA::Double tm)
+::CORBA::Boolean OpenHRP::_objref_creekSequencePlayerService::setBasePosRel(const dSequence& pos, ::CORBA::Double tm)
 {
   _0RL_cd_80d7548870faf0f8_20000000 _call_desc(_0RL_lcfn_80d7548870faf0f8_b0000000, "setBasePosRel", 14);
-  _call_desc.arg_0 = &(::OpenHRP::dSequence&) pos;
+  _call_desc.arg_0 = &(dSequence&) pos;
   _call_desc.arg_1 = tm;
 
   _invoke(_call_desc);
@@ -481,7 +457,7 @@ class _0RL_cd_80d7548870faf0f8_c0000000
 {
 public:
   inline _0RL_cd_80d7548870faf0f8_c0000000(LocalCallFn lcfn,const char* op_,size_t oplen,_CORBA_Boolean upcall=0):
-     omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+     omniCallDescriptor(lcfn, op_, oplen, 0, 0, 0, upcall)
   {
     
   }
@@ -491,8 +467,6 @@ public:
 
     
   
-  static const char* const _user_exns[];
-
   ::CORBA::Long arg_0;
 };
 
@@ -507,10 +481,6 @@ void _0RL_cd_80d7548870faf0f8_c0000000::unmarshalArguments(cdrStream& _n)
   (::CORBA::Long&)arg_0 <<= _n;
 
 }
-
-const char* const _0RL_cd_80d7548870faf0f8_c0000000::_user_exns[] = {
-  0
-};
 
 // Local call call-back function.
 static void

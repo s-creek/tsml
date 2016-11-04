@@ -85,7 +85,8 @@ RTC::ReturnCode_t creekSequencePlayer::onInitialize()
   //
   // setup robot model
   //
-  m_robot = new creek::Body();
+  //m_robot = new creek::Body();
+  m_robot = creek::BodyPtr(new creek::Body());
   creek::loadBody( m_robot, prop["model"] );
   m_dof = m_robot->numJoints();
 
@@ -153,9 +154,6 @@ RTC::ReturnCode_t creekSequencePlayer::onExecute(RTC::UniqueId ec_id)
     m_waitFlag = false;
     m_waitSem.post();
   }
-
-
-  //CHECK_COUNTER(cc::m_stepCounter);
 
 
   if( !m_seq[ANGLES]->empty() ) {

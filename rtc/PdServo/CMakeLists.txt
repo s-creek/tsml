@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 if (NOT CMAKE_MODULE_PATH)
-  set(CMAKE_MODULE_PATH /home/player/tsml/share/hrpsys/cmake_modules CACHE STRING "set path to cmake_modules")
+  set(CMAKE_MODULE_PATH $ENV{TSML_DIR}/share/cmake_modules/ CACHE STRING "set path to cmake_modules")
 endif (NOT CMAKE_MODULE_PATH)
 
 ####

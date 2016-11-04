@@ -22,7 +22,7 @@ public:
   ::CORBA::Boolean setBaseRpy(const OpenHRP::dSequence& rpy, ::CORBA::Double tm);
   ::CORBA::Boolean setZmp(const OpenHRP::dSequence& zmp, ::CORBA::Double tm);
   ::CORBA::Boolean isEmpty();
-  void jointCalib(int scale);
+  void jointCalib(long scale);
 
   ::CORBA::Boolean setBasePosRel(const OpenHRP::dSequence& pos, ::CORBA::Double tm);
 
