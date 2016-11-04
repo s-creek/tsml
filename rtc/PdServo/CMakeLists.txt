@@ -29,7 +29,6 @@ set(comp_sources ${comp_name}.cpp)
 
 add_library(${comp_name} SHARED ${comp_sources})
 target_link_libraries(${comp_name} ${OPENRTM_LIBRARIES})
-#target_link_libraries(${comp_name} lapack blas f2c m)
 set_target_properties(${comp_name} PROPERTIES PREFIX "")
 
 if (NO_COMP)
@@ -39,11 +38,10 @@ else()
   add_executable(${comp_name}Comp ${comp_name}Comp.cpp ${comp_sources})
   target_link_libraries(${comp_name}Comp ${OPENRTM_LIBRARIES})
   target_link_libraries(${comp_name}Comp boost_filesystem)
-  target_link_libraries(${comp_name}Comp m)
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3 -fno-schedule-insns -fno-schedule-insns2 -fno-strict-aliasing")
 
-#install(TARGETS ${target}
+
 install(TARGETS ${comp_name} LIBRARY DESTINATION rtc CONFIGURATIONS)
 #install(FILES connect.conf DESTINATION rtc)

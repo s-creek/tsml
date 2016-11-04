@@ -26,29 +26,6 @@ execute_process(
 include(GenerateStubSkel)
 
 
-###
-# setting for OpenHRP or choreonoid
-#
-if(NOT USE_CNOID_MODEL)
-  find_package(OpenHRP REQUIRED)
-  include_directories(${OPENHRP_INCLUDE_DIRS})
-  link_directories(${OPENHRP_LIBRARY_DIRS})
-  set(MODEL_LIBRARIES ${OPENHRP_LIBRARIES})
-  add_definitions(-DUSE_HRP_MODEL)
-else()
-  pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
-  include_directories(${CHOREONOID_INCLUDE_DIRS})
-  link_directories(${CHOREONOID_LIBRARY_DIRS} $ENV{HOME}/workspace/git/creeklib/interpolator $ENV{HOME}/workspace/git/creeklib/walk)
-  set(MODEL_LIBRARIES ${CHOREONOID_LIBRARIES} creekWalk_cnoid creekInterpolator_cnoid)
-
-  add_definitions(-DUSE_CNOID_MODEL)
-  string(REPLACE "." "" CNOID_VERSION ${CHOREONOID_VERSION})
-  message("cnoid ver = " ${CHOREONOID_VERSION})
-  message("cnoid ver = " ${CNOID_VERSION})
-  add_definitions(-DCNOID_VERSION=${CNOID_VERSION})
-endif()
-
-
 include_directories(${CMAKE_MODULE_PATH})
 
 
@@ -64,9 +41,6 @@ set(comp_sources ${comp_name}.cpp)
 
 add_library(${comp_name} SHARED ${comp_sources})
 target_link_libraries(${comp_name} ${OPENRTM_LIBRARIES})
-target_link_libraries(${comp_name} ${MODEL_LIBRARIES})
-target_link_libraries(${comp_name} m)
-#target_link_libraries(lapack blas f2c)
 set_target_properties(${comp_name} PROPERTIES PREFIX "")
 
 if (NO_COMP)
@@ -75,13 +49,11 @@ else()
   set(target ${comp_name} ${comp_name}Comp)
   add_executable(${comp_name}Comp ${comp_name}Comp.cpp ${comp_sources})
   target_link_libraries(${comp_name}Comp ${OPENRTM_LIBRARIES})
-  target_link_libraries(${comp_name}Comp ${MODEL_LIBRARIES})
-  target_link_libraries(${comp_name}Comp boost_filesystem)
-  target_link_libraries(${comp_name}Comp m)
+  #target_link_libraries(${comp_name}Comp boost_filesystem)
 endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb3 -fno-schedule-insns -fno-schedule-insns2 -fno-strict-aliasing")
 
-#install(TARGETS ${target}
-install(TARGETS ${comp_name} LIBRARY DESTINATION lib/rtc CONFIGURATIONS)
+
+install(TARGETS ${comp_name} LIBRARY DESTINATION rtc CONFIGURATIONS)
 #install(FILES connect.conf DESTINATION rtc)

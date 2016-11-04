@@ -58,7 +58,7 @@ def createComps(hostname=socket.gethostname()):
 
     global kf, seq, seq_svc, sh, wpg, wpg_svc
 
-    kf = initRTC("creekStateEstimator", "kf")
+    kf = initRTC("creekAttitudeEstimator", "kf")
     if kf != None:
         rtcList.append(kf)
 

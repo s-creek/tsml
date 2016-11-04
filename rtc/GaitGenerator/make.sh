@@ -11,12 +11,9 @@ export COMP_NAME="creekGaitGenerator"
 # not change !!
 #
 export RTM_ROOT=/usr
-#export PATH=/usr/bin:$PATH
-#export PKG_CONFIG_PATH=/usr/lib/pkgconfig:$PKG_CONFIG_PATH
-#export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH
 
 #CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/usr/lib/choreonoid-1.5 -DCOMP_NAME=${COMP_NAME} -DUSE_CNOID_MODEL=ON"
-CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/opt/tsml -DCOMP_NAME=${COMP_NAME} -DUSE_CNOID_MODEL=ON"
+CMAKE_OPT="-DCMAKE_INSTALL_PREFIX:STRING=/opt/tsml/lib -DCOMP_NAME=${COMP_NAME} -DUSE_CNOID_MODEL=ON"
 MAKE_OPT="VERBOSE=1 $@"
 
 # for logging

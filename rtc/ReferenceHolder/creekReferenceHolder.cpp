@@ -1,13 +1,6 @@
 // -*- C++ -*-
 
 #include "creekReferenceHolder.h"
-#include <creeklib/model/modelLoader.hpp>
-
-#ifdef USE_CNOID_MODEL
-#include <cnoid/EigenUtil>
-#else 
-#include <hrpUtil/Tvmet3d.h>
-#endif
 
 // Module specification
 static const char* creekreferenceholder_spec[] =
@@ -42,8 +35,7 @@ creekReferenceHolder::creekReferenceHolder(RTC::Manager* manager)
     m_baseRpyIn ("baseRpyIn",  m_baseRpy),
     m_baseRpyOut("baseRpyOut", m_baseRpy),
     m_zmpRefIn ("zmpRefIn",  m_zmpRef),
-    m_zmpRefOut("zmpRefOut", m_zmpRef),
-    m_goAct(true)
+    m_zmpRefOut("zmpRefOut", m_zmpRef)
 {
 }
 
@@ -70,53 +62,29 @@ RTC::ReturnCode_t creekReferenceHolder::onInitialize()
   addInPort ("zmpRefIn",  m_zmpRefIn);
   addOutPort("zmpRefOut", m_zmpRefOut);
 
-
-  //
-  // get properties
-  //
-  RTC::Properties& prop = getProperties();
-
-
-  //
-  // init model
-  //
-  m_robot = new creek::Body();
-  creek::loadBody( m_robot, prop["model"] );
-
-  std::vector<double> tmp;
-  coil::stringTo(tmp, prop["initBasePos"].c_str());
-  m_robot->rootLink()->p() << tmp[0], tmp[1], tmp[2];
-
-  tmp.clear();
-  coil::stringTo(tmp, prop["initBaseRpy"].c_str());
-  m_robot->rootLink()->R() = model::rotFromRpy(tmp[0], tmp[1], tmp[2]);
-
-  unsigned int dof = m_robot->numJoints();  
-  for(unsigned int i=0; i<dof; i++) m_robot->joint(i)->q() = 0.0;
-  m_robot->calcForwardKinematics();
-
-  creek::Vector3 zmp(m_robot->calcCenterOfMass());
-  zmp(2) = 0.0;
-  creek::Vector3 zmpWaist( m_robot->rootLink()->R().transpose() * (zmp-m_robot->rootLink()->p()) );
-
-
+  
   //
   // init data port
   //
-  m_q.data.length(dof);
-  for(unsigned int i=0; i<dof; i++) m_q.data[i] = 0.0;
+  RTC::Properties& prop = getProperties();
 
-  m_basePos.data.x = m_robot->rootLink()->p()(0);
-  m_basePos.data.y = m_robot->rootLink()->p()(1);
-  m_basePos.data.z = m_robot->rootLink()->p()(2);
+  std::vector<double> tmp;
+  coil::stringTo(tmp, prop["initBasePos"].c_str());
+  m_basePos.data.x = tmp[0];
+  m_basePos.data.y = tmp[1];
+  m_basePos.data.z = tmp[2];
 
+  tmp.clear();
+  coil::stringTo(tmp, prop["initBaseRpy"].c_str());
   m_baseRpy.data.r = tmp[0];
   m_baseRpy.data.p = tmp[1];
   m_baseRpy.data.y = tmp[2];
 
-  m_zmpRef.data.x = zmpWaist[0];
-  m_zmpRef.data.y = zmpWaist[1];
-  m_zmpRef.data.z = zmpWaist[2];
+  tmp.clear();
+  coil::stringTo(tmp, prop["initZmp"].c_str());
+  m_zmpRef.data.x = tmp[0];
+  m_zmpRef.data.y = tmp[1];
+  m_zmpRef.data.z = tmp[2];
 
 
   std::cout << "creekReferenceHolder : init data\n"
@@ -125,7 +93,6 @@ RTC::ReturnCode_t creekReferenceHolder::onInitialize()
 	    << "    zmp pos  = " << m_zmpRef.data.x  << ", " << m_zmpRef.data.y  << ", " << m_zmpRef.data.z  << "\n";
 
 
-  //SET_CHECK_COUNTER;
   return RTC::RTC_OK;
 }
 
@@ -136,10 +103,9 @@ RTC::ReturnCode_t creekReferenceHolder::onActivated(RTC::UniqueId ec_id)
 
   if( m_qCurIn.isNew() ) {
     m_qCurIn.read();
-    //std::cout << "holder : q0 = " << m_qCur.data[0] << std::endl;
-    unsigned int dof = m_robot->numJoints();
+    unsigned int dof = qCur.data.length();
+    m_q.data.length(dof);
     memcpy(m_q.data.get_buffer(), m_qCur.data.get_buffer(), sizeof(double)*dof );
-    m_goAct = true;
   }
   else {
     std::cout << "creekReferenceHolder : connection error" << std::endl;
@@ -166,16 +132,7 @@ RTC::ReturnCode_t creekReferenceHolder::onExecute(RTC::UniqueId ec_id)
   if( m_zmpRefIn.isNew() )  m_zmpRefIn.read();
 
   //std::cout << "creekReferenceHolder : time = " << toSec(m_qCur.tm) << std::endl;
-  //CHECK_COUNTER(cc::m_stepCounter);
-  //std::cout << "creekReferenceHolder : check time = " << toSec(m_qCur.tm) << std::endl;
-
-  if( m_goAct ) {
-    unsigned int dof = m_robot->numJoints();
-    memcpy(m_q.data.get_buffer(), m_qCur.data.get_buffer(), sizeof(double)*dof );
-    m_goAct = false;
-  }
-
-
+  
   m_q.tm = m_qCur.tm;
   m_qOut.write();
   m_basePosOut.write();

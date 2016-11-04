@@ -13,8 +13,6 @@
 
 #include "VectorConvert.h"
 
-#include <creeklib/model/modelHeaders.h>
-
 using namespace RTC;
 
 class creekReferenceHolder  : public RTC::DataFlowComponentBase
@@ -55,8 +53,7 @@ protected:
 
 
 private:
-  creek::BodyPtr m_robot;
-  bool m_goAct;
+
 };
 
 

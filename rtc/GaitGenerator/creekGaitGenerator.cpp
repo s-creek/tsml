@@ -87,6 +87,7 @@ RTC::ReturnCode_t creekGaitGenerator::onInitialize()
   robot->rootLink()->p() << 0.0, 0.0, 0.854;
   
   m_biped = boost::make_shared<creek::BipedRobot>();
+  //m_biped = creek::BipedRobotPtr( new creek::BipedRobot() );
   m_biped->setRobot(robot);
   //m_biped->setJointPath("R_ANKLE_P", "PELVIS", "L_ANKLE_P", "PELVIS");
   m_biped->setJointPath(prop["RLEG_END"], prop["BASE_LINK"], prop["LLEG_END"], prop["BASE_LINK"]);
@@ -111,7 +112,16 @@ RTC::ReturnCode_t creekGaitGenerator::onInitialize()
   m_qRef.data.length(robot->numJoints());
   m_contactStates.data.length(2);
   m_contactStates.data[0]=m_contactStates.data[1]=1;
-  
+  m_basePosInit.data.x = m_basePosInit.data.y = m_basePosInit.data.z = 0.0;
+  m_baseRpyInit.data.r = m_baseRpyInit.data.p = m_baseRpyInit.data.y = 0.0;
+
+
+  // debug
+  std::cout << "creekGaitGenerator" << std::endl;
+  std::cout << "  joint num = " << m_biped->body()->numJoints() << std::endl;
+  std::cout << "  rleg joint num = " << m_biped->rleg()->numJoints() << std::endl;
+  std::cout << "  lleg joint num = " << m_biped->lleg()->numJoints() << std::endl;
+
 
   return RTC::RTC_OK;
 }
@@ -119,6 +129,7 @@ RTC::ReturnCode_t creekGaitGenerator::onInitialize()
 
 RTC::ReturnCode_t creekGaitGenerator::onActivated(RTC::UniqueId ec_id)
 {
+  std::cout << "creekGaitGenerator : onActivated" << std::endl;
   return RTC::RTC_OK;
 }
 
@@ -198,11 +209,11 @@ RTC::ReturnCode_t creekGaitGenerator::onExecute(RTC::UniqueId ec_id)
       m_baseRpy.data.p = rpy[1];
       m_baseRpy.data.y = rpy[2];
 
-      creek::Vector3 zmpRel = m_biped->body()->rootLink()->R().transpose() * (step.zmp - m_biped->body()->rootLink()->p());
+      creek::Vector3 zmpRel(m_biped->body()->rootLink()->R().transpose() * (step.zmp - m_biped->body()->rootLink()->p()));
       m_zmpRef.data.x = zmpRel[0];
       m_zmpRef.data.y = zmpRel[1];
       m_zmpRef.data.z = zmpRel[2];
-
+      std::cout << "zmp = " << step.zmp(1) << std::endl;
       switch( step.sup )
 	{
 	case creek::RFOOT:
@@ -253,8 +264,8 @@ void creekGaitGenerator::init()
 
 
   m_planner->init(m_biped);
-  m_planner->calcOffset(0.19, 0.8, m_planner->capturePoint()->comHeight());
-  //m_planner->setOffset(0.015);
+  //m_planner->calcOffset(0.19, 0.8, m_planner->capturePoint()->comHeight());
+  m_planner->setOffset(0.02);
 
   m_waistRef = m_biped->body()->rootLink()->R();
   m_rfootRef = m_biped->rfoot()->position();
