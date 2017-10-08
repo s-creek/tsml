@@ -6,6 +6,7 @@ if (NOT CMAKE_MODULE_PATH)
   #set(CMAKE_MODULE_PATH /opt/grx/share/hrpsys/cmake_modules/ CACHE STRING "set path to cmake_modules")
 endif (NOT CMAKE_MODULE_PATH)
 
+add_definitions(-std=c++11)
 ####
 ## settings for OpenRTM
 ##
@@ -28,7 +29,7 @@ include(GenerateStubSkel)
 ####
 ## setting choreonoid
 ##
-pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
+pkg_check_modules(CHOREONOID REQUIRED choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 
@@ -40,7 +41,7 @@ find_package(PCL 1.2 REQUIRED)
 include_directories(${PCL_INCLUDE_DIRS})
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
-
+list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")
 
 include_directories(${CMAKE_MODULE_PATH})
 

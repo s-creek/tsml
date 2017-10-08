@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 
 set(IDL_DIR ${CMAKE_CURRENT_BINARY_DIR}/)
 set(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-
+add_definitions(-std=c++11)
 ####
 ## settings for OpenRTM and OpenHRP
 ##
@@ -13,7 +13,7 @@ pkg_check_modules(OPENRTM REQUIRED openrtm-aist)
 include_directories(${OPENRTM_INCLUDE_DIRS})
 link_directories(${OPENRTM_LIBRARY_DIRS})
 
-pkg_check_modules(CHOREONOID choreonoid-body-plugin)
+pkg_check_modules(CHOREONOID choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 

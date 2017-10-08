@@ -30,7 +30,7 @@ include(GenerateStubSkel)
 ###
 # setting choreonoid
 #
-pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
+pkg_check_modules(CHOREONOID REQUIRED choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 
@@ -50,7 +50,7 @@ set(comp_sources ${comp_sources} ${comp_name}Service_impl.cpp ${comp_name}Servic
 
 add_library(${comp_name} SHARED ${comp_sources})
 target_link_libraries(${comp_name} ${OPENRTM_LIBRARIES})
-target_link_libraries(${comp_name} ${CHOREONOID_LIBRARIES} CnoidOpenRTM)
+target_link_libraries(${comp_name} ${CHOREONOID_LIBRARIES} )
 target_link_libraries(${comp_name} lapack blas f2c m)
 set_target_properties(${comp_name} PROPERTIES PREFIX "")
 
@@ -60,7 +60,7 @@ else()
   set(target ${comp_name} ${comp_name}Comp)
   add_executable(${comp_name}Comp ${comp_name}Comp.cpp ${comp_sources})
   target_link_libraries(${comp_name}Comp ${OPENRTM_LIBRARIES})
-  target_link_libraries(${comp_name}Comp ${CHOREONOID_LIBRARIES} CnoidOpenRTM)
+  target_link_libraries(${comp_name}Comp ${CHOREONOID_LIBRARIES} )
   target_link_libraries(${comp_name}Comp boost_filesystem)
   target_link_libraries(${comp_name}Comp m)
 endif()

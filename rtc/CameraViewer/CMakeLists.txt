@@ -29,7 +29,7 @@ include(GenerateStubSkel)
 ###
 # setting choreonoid
 #
-pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
+pkg_check_modules(CHOREONOID REQUIRED choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 

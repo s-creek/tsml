@@ -5,6 +5,7 @@ if (NOT CMAKE_MODULE_PATH)
   set(CMAKE_MODULE_PATH /home/player/tsml/share/hrpsys/cmake_modules/ CACHE STRING "set path to cmake_modules")
   #set(CMAKE_MODULE_PATH /opt/grx/share/hrpsys/cmake_modules/ CACHE STRING "set path to cmake_modules")
 endif (NOT CMAKE_MODULE_PATH)
+add_definitions(-std=c++0x)
 
 ####
 ## settings for OpenRTM
@@ -24,7 +25,7 @@ execute_process(
 include(GenerateStubSkel)
 
 
-pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
+pkg_check_modules(CHOREONOID REQUIRED choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 

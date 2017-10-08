@@ -6,6 +6,7 @@ if (NOT CMAKE_MODULE_PATH)
   #set(CMAKE_MODULE_PATH /opt/grx/share/hrpsys/cmake_modules/ CACHE STRING "set path to cmake_modules")
 endif (NOT CMAKE_MODULE_PATH)
 
+add_definitions(-std=c++11)
 ####
 ## settings for OpenRTM and Choreonoid
 ##
@@ -24,7 +25,8 @@ execute_process(
 include(GenerateStubSkel)
 
 
-pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin)
+#pkg_check_modules(CHOREONOID REQUIRED choreonoid-body-plugin) 12.04
+pkg_check_modules(CHOREONOID REQUIRED choreonoid choreonoid-body-plugin)
 include_directories(${CHOREONOID_INCLUDE_DIRS})
 link_directories(${CHOREONOID_LIBRARY_DIRS})
 
