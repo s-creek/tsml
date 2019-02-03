@@ -5,7 +5,8 @@
 #include <rtm/idl/BasicDataTypeSkel.h>
 #include <rtm/DataInPort.h>
 
-#include <cnoid/corba/CameraImage.hh>
+//#include <cnoid/corba/CameraImage.hh>
+#include <rtm/ext/CameraCommonInterface.hh>
 #include <opencv2/opencv.hpp>
 #include <zbar.h>
 
